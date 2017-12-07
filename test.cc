@@ -1,10 +1,14 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/OpenGL.hpp>
+#include<iostream>
+#include<string>
 
 int main()
 {
 
-
-  sf::RenderWindow window(sf::VideoMode(940, 880, 32), "SFML");
+  sf::RenderWindow window(sf::VideoMode(940, 880,32),"Paradises Papers");
+  std::string Name="";
 
 
   sf::Texture imageSource;
@@ -21,7 +25,47 @@ int main()
      sf::Event event;
      while(window.pollEvent(event))
      {
+        switch (event.type)
+        {
+            // window closed
+            case sf::Event::Closed:
+                window.close();
+                break;
 
+            // key pressed
+            case sf::Event::KeyPressed:
+                break;
+
+            case sf::Event::TextEntered:
+            {
+                if (event.text.unicode < 128)
+                    {
+                        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+                        Name+=static_cast<char>(event.text.unicode);
+                    }
+                if((event.text.unicode)==13)
+                    std::cout<<"Name:"<<Name<<std::endl;
+                break;
+            }
+
+            case sf::Event::MouseButtonPressed:
+            {
+                sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+                std::cout <<"X:"<< localPosition.x <<" Y:"<< localPosition.y <<std::endl;
+                sf::Vector2u size = window.getSize();
+                unsigned int width = size.x;
+                unsigned int height = size.y;
+                std::cout <<"w:"<< width <<" h:"<< height <<std::endl;
+                float constante = 940/846.0;
+                if(width/float(height)!=constante)
+                    window.setSize(sf::Vector2u(width, constante*width));
+
+
+            }
+            // we don't process other types of events
+            default:
+                break;
+        }
 
      }
 
@@ -31,3 +75,28 @@ int main()
 
   return EXIT_SUCCESS;
 }
+
+//int main()
+//{
+//
+//    // Display the list of all the video modes available for fullscreen
+//    std::vector modes = sf::VideoMode::getFullscreenModes();
+//
+//    // Display each mode
+//    for (std::size_t i = 0; i < modes.size(); ++i)
+//    {
+//        sf::VideoMode mode = modes[i];
+//        std::cout << "Mode #" << i << "\t"
+//                  << mode.width << "x" << mode.height << " \t "
+//                  << mode.bitsPerPixel << " bpp" << std::endl;
+//    }
+//
+//    // Get and display desktop mode
+//    sf::VideoMode mode = sf::VideoMode::getDesktopMode();
+//    std::cout << "Desktop"  << "\t"
+//              << mode.width << "x" << mode.height << " \t "
+//              << mode.bitsPerPixel << " bpp" << std::endl;
+//
+//    // End of application
+//    return 0;
+//}
