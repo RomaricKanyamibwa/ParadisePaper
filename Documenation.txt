@@ -1,0 +1,2 @@
+https://www.sfml-dev.org/tutorials/2.0/window-events.php#the-textentered-event
+
