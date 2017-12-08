@@ -4,6 +4,16 @@
 #include<iostream>
 #include<string>
 
+//France, 200, 513, 324, 636
+std::string get_country(int X,int Y)
+{
+    std::string country="";
+    if(X>=200 && X<=324 && Y>=513 && Y<=636)
+        country="France";
+
+    return country;
+}
+
 int main()
 {
 
@@ -53,6 +63,7 @@ int main()
                 sf::Vector2i localPosition = sf::Mouse::getPosition(window);
                 std::cout <<"X:"<< localPosition.x <<" Y:"<< localPosition.y <<std::endl;
                 sf::Vector2u size = window.getSize();
+                std::cout<<"Country:"<<get_country(localPosition.x ,localPosition.y)<<std::endl;
                 unsigned int width = size.x;
                 unsigned int height = size.y;
                 std::cout <<"w:"<< width <<" h:"<< height <<std::endl;
