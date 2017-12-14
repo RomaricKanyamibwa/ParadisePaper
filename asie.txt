@@ -1,0 +1,49 @@
+Afghanistan, 	,Kaboul, 	647500, 	31 056 997 	48
+Arabie saoudite 	Riyad 	2 152 000 	27 019 731 	12
+Arménie 	Erevan 	29 800 	2 976 372 	100
+Azerbaïdjan 	Bakou 	86 600 	7 961 619 	92
+Bahreïn 	Manama 	665 	686 585 	1 032
+Bangladesh 	Dhâkâ 	144 000 	147 365 352 	1 023
+Bhoutan 	Thimphou 	47 000 	2 279 723 	48
+Brunei 	Bandar Seri Begawan 	5 770 	379 444 	66
+Cambodge 	Phnom Penh 	181 035 	13 881 427 	76
+Chine (République populaire de) 	Pékin 	9 596 960 	1 313 973 713 	137
+Chypre (République de) 	Nicosie 	9 250 	784 301 	85
+Corée du Nord 	Pyongyang 	120 540 	23 113 019 	191
+Corée du Sud 	Séoul 	99 274 	48 846 823 	492
+Émirats arabes unis 	Abou Dabi 	82 880 	3 870 936 	46
+Géorgie 	Tbilissi 	69 700 	4 661 473 	67
+Inde 	New Delhi 	3 287 590 	1 095 351 995 	333
+Indonésie 	Jakarta 	1 919 440 	245 452 739 	127
+Iran 	Téhéran 	1 648 000 	68 688 433 	41
+Irak 	Bagdad 	437 072 	26 783 383 	61
+Israël 	Jérusalem/Tel-Aviv 	20 770 	6 352 117 	305
+Japon 	Tokyo 	377 835 	127 463 611 	337
+Jordanie 	Amman 	92 300 	5 906 760 	64
+Kazakhstan 	Astana 	2 717 300 	15 233 244 	5
+Kirghizistan 	Bichkek 	198 500 	5 213 898 	135
+Koweït 	Koweït 	17 820 	2 418 393 	
+Laos 	Vientiane 	236 800 	6 368 481 	27
+Liban 	Beyrouth 	10 452 	3 874 050 	370
+Malaisie 	Kuala Lumpur 	329 750 	24 385 858 	74
+Maldives 	Malé 	298 	359 008 	1 204
+Mongolie 	Oulan-Bator 	1 565 000 	2 832 224 	1,8
+Myanmar (anciennement Birmanie) 	Naypyidaw 	678 500 	47 382 633 	69
+Népal 	Katmandou 	147 781 	28 287 147 	191
+Oman 	Mascate 	309 500 	3 102 229 	10
+Ouzbékistan 	Tachkent 	447 400 	27 307 134 	61
+Pakistan 	Islâmâbâd 	803 940 	165 803 560 	206
+Philippines 	Manille 	300 000 	89 468 677 	298
+Qatar 	Doha 	11 437 	885 359 	77
+Russie 	Moscou 	17 075 200 	142 893 540 	8
+Singapour 	Singapour 	699 	4 492 150 	6 426
+Sri Lanka 	Sri Jayawardenapura 	65 610 	20 222 240 	308
+Syrie 	Damas 	185 180 	18 881 361 	101
+Tadjikistan 	Douchanbé 	143 100 	7 320 815 	51
+Taïwan (République de Chine) 	Taipei 	35 980 	1 303 608 700 	640
+Thaïlande 	Bangkok 	514 000 	64 631 595 	125
+Timor oriental 	Dili 	15 007 	1 062 777 	70
+Turquie 	Ankara 	780 580 	70 413 958 	90
+Turkménistan 	Achgabat 	488 100 	5 042 920 	10
+Viêt Nam 	Hanoï 	329 560 	84 402 966 	256
+Yémen 	Sanaa 	527 970 	21 456 188 	40
