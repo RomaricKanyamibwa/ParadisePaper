@@ -18,7 +18,7 @@ Estonie, 595,267,653,301
 Lettonie
 Lithuanie
 Autriche,
-République Tchèque
+République Tchèque,
 Slovaquie,
 Hongrie,
 Roumanie,
@@ -26,4 +26,3 @@ Bulgarie,
 Croatie
 Slovaquie
 Serbie
-
