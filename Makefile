@@ -1,19 +1,19 @@
 CC=g++ -g
-CCFLAGS= #-Wall -Werror -std=c++11
+CCFLAGS= -Wall -Werror -std=c++11
 LIBFLAGS= -lsfml-graphics -lsfml-window -lsfml-system
-SRC= $(wildcard *.cc)
-OBJ= $(SRC:.cc=.o)
+SRC= $(wildcard *.cpp)
+OBJ= $(SRC:.cpp=.o)
 EXEC= ParadisePaper
 
 
 all: $(EXEC)
 
-main.o:matrix.hh tableau2D.hh
+test.o:Places.h Pays.h
 
 $(EXEC): $(OBJ)
 	$(CC) $^ -o $@   $(LIBFLAGS)
 
-%.o: %.cc
+%.o: %.cpp
 	$(CC) $(CCFLAGS) -o $@ -c $<
 
 .depends:
