@@ -5,10 +5,10 @@
 #include<string>
 #include <fstream>
 #include "Place.h"
-#include "Pays.h"
+#include "Country.h"
 #include <sstream>      // std::stringstream
 
-std::ostream& operator<<(std::ostream & out, Pays p)
+std::ostream& operator<<(std::ostream & out, Country p)
 {
 
     out << "Country:"<<p.getName()<<",xg:"<<p.getPosition()[0]<<",yh:"<<p.getPosition()[1]<<",xd:"<<p.getPosition()[2]<<",yb:"<<p.getPosition()[3]<<std::endl;
@@ -16,11 +16,11 @@ std::ostream& operator<<(std::ostream & out, Pays p)
 
 }
 //France, 200, 513, 324, 636
-std::vector<Pays> get_Europe()
+std::vector<Country> get_Europe()
 {
     std::string line;
     std::ifstream myfile ("europe.txt");
-    std::vector<Pays> Europe;
+    std::vector<Country> Europe;
     if (myfile.is_open())
     {
 //        getline (myfile,line);
@@ -35,7 +35,7 @@ std::vector<Pays> get_Europe()
             ss>>Nom>>xg>>yh>>xd>>yb;
             if(!Nom.empty())
             {
-                Pays Country(Nom,xg,yh,xd,yb);
+                Country Country(Nom,xg,yh,xd,yb);
                 //std::cout<<"TEST SS:"<<Country<<std::endl;
                 Europe.push_back(Country);
             }
@@ -47,16 +47,16 @@ std::vector<Pays> get_Europe()
     else std::cout << "Unable to open file";
     return Europe;
 }
-std::string get_country(int X,int Y,std::vector<Pays> continent)
+std::string get_country(int X,int Y,std::vector<Country> continent)
 {
     std::string country="";
     //std::string Nom;
     //int xg,yh,xd,yb;
     //std::stringstream ss;
-//    Pays france=Pays("France",200,324,513,6360);
+//    Country france=Country("France",200,324,513,6360);
 //    std::string line;
 //    std::ifstream myfile ("europe.txt");
-//    std::vector<Pays> Europe;
+//    std::vector<Country> Europe;
 //    if (myfile.is_open())
 //    {
 ////        getline (myfile,line);
@@ -71,7 +71,7 @@ std::string get_country(int X,int Y,std::vector<Pays> continent)
 //            ss>>Nom>>xg>>yh>>xd>>yb;
 //            if(!Nom.empty())
 //            {
-//                Pays Country(Nom,xg,yh,xd,yb);
+//                Country Country(Nom,xg,yh,xd,yb);
 //                std::cout<<"TEST SS:"<<Country<<std::endl;
 //                Europe.push_back(Country);
 //            }
@@ -105,7 +105,7 @@ int main()
 
   sf::RenderWindow window(sf::VideoMode(940, 680,32),"Paradises Papers");
   std::string Name="";
-  std::vector<Pays> Europe=get_Europe();
+  std::vector<Country> Europe=get_Europe();
 
 
   sf::Texture imageSource;

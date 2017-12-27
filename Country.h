@@ -1,6 +1,6 @@
 
-#ifndef PAYS_H
-#define PAYS_H
+#ifndef Country_H
+#define Country_H
 #include "Place.h"
 
 #include <string>
@@ -9,23 +9,23 @@
 
 
 /**
-  * class Pays
+  * class Country
   *
   */
 //    file.open("europe.txt");
-//    list<Pays> paysEurope;
+//    list<Country> CountryEurope;
 //    while(getline(file,s))
 //    {
 //        if(!s.empty())string
-//            paysEurope.push_back(Reaction(s));
+//            CountryEurope.push_back(Reaction(s));
 //    }
-//    for(const  auto& iter : paysEurope)
+//    for(const  auto& iter : CountryEurope)
 //    {
 //      std::cout << iter.normalize() << endl;
 //    }
 //    file.close();
 
-class Pays : public Place
+class Country : public Place
 {
 public:
 
@@ -36,13 +36,13 @@ public:
   /**
    * Empty Constructor
    */
-   Pays();
-  Pays (std::string Nom, int xg, int yh, int xd, int yb);
+   Country();
+  Country (std::string Nom, int xg, int yh, int xd, int yb);
 
   /**
    * Empty Destructor
    */
-  virtual ~Pays ();
+  virtual ~Country ();
 
   // Static Public attributes
   //
@@ -165,4 +165,4 @@ private:
 };
 
 
-#endif // PAYS_H
+#endif // Country_H
