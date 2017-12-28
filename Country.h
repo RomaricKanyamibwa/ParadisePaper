@@ -108,8 +108,20 @@ public:
 
   // Private attribute accessor methods
   //
-
-
+//
+//  bool operator==(Place c)
+//  {
+//      bool b=true;
+//      int i=0;
+//      if(this->Position.size()!=c.getPosition().size())
+//        return false;
+//      for(auto const& value:c.getPosition())
+//      {
+//          b=this->Position[i++]==value && b;
+//      }
+//      return this->Name.compare(c.getName()) && b&&this->Capitale=c.getCapitale &&this->Superficie==c.getSuperficie;
+//  }
+//
   /**
    * Set the value of Capitale
    * @param new_var the new value of Capitale

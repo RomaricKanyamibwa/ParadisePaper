@@ -1,18 +1,19 @@
 
-#ifndef PLACE_H
-#define PLACE_H
+#ifndef PERSON_H
+#define PERSON_H
 
 #include <string>
 #include <vector>
 #include "Display.h"
 
 
+
 /**
-  * class Place
+  * class Person
   *
   */
 
-class Place : public Display
+class Person : public Display
 {
 public:
 
@@ -23,13 +24,13 @@ public:
   /**
    * Empty Constructor
    */
-  Place ();
-  Place (std::string Nom, int xg, int yh, int xd, int yb);
+  Person ();
+  Person (std::string Name,std::string Image):Display(Image),Name(Name){};
 
   /**
    * Empty Destructor
    */
-  virtual ~Place ();
+  virtual ~Person ();
 
   // Static Public attributes
   //
@@ -80,7 +81,7 @@ private:
   //
 
   std::string Name;
-  std::vector<int> Position;
+  //std::string Image;
 public:
 
 
@@ -95,18 +96,6 @@ public:
   // Private attribute accessor methods
   //
 
-  bool operator==(Place c)
-  {
-      bool b=true;
-      int i=0;
-      if(this->Position.size()!=c.getPosition().size())
-        return false;
-      for(auto const& value:c.getPosition())
-      {
-          b=this->Position[i++]==value && b;
-      }
-      return this->Name.compare(c.getName()) && b;
-  }
 
   /**
    * Set the value of Name
@@ -124,21 +113,21 @@ public:
     return Name;
   }
 
-  /**
-   * Set the value of Position
-   * @param new_var the new value of Position
-   */
-  void setPosition (std::vector<int> new_var)   {
-      Position = new_var;
-  }
-
-  /**
-   * Get the value of Position
-   * @return the value of Position
-   */
-  std::vector<int> getPosition ()   {
-    return Position;
-  }
+//  /**
+//   * Set the value of Image
+//   * @param new_var the new value of Image
+//   */
+//  void setImage (std::string new_var)   {
+//      Image = new_var;
+//  }
+//
+//  /**
+//   * Get the value of Image
+//   * @return the value of Image
+//   */
+//  std::string getImage ()   {
+//    return Image;
+//  }
 private:
 
 
@@ -146,4 +135,4 @@ private:
 
 };
 
-#endif // PLACE_H
+#endif // PERSON_H

@@ -4,8 +4,10 @@
 #include<iostream>
 #include<string>
 #include <fstream>
-#include "Place.h"
-#include "Country.h"
+//#include "Place.h"
+//#include "Country.h"
+#include "Journalist.h"
+#include "Continent.h"
 #include <sstream>      // std::stringstream
 
 std::ostream& operator<<(std::ostream & out, Country p)
@@ -23,68 +25,30 @@ std::vector<Country> get_Europe()
     std::vector<Country> Europe;
     if (myfile.is_open())
     {
-//        getline (myfile,line);
         while ( getline (myfile,line) )
         {
             std::string Nom;
             int xg=0,yh=0,xd=0,yb=0;
             std::stringstream ss;
             replace(line.begin(), line.end(), ',', ' ');
-//            replace(line.begin(), line.end(), ',', ' ');
             ss<<line;
             ss>>Nom>>xg>>yh>>xd>>yb;
             if(!Nom.empty())
             {
                 Country Country(Nom,xg,yh,xd,yb);
-                //std::cout<<"TEST SS:"<<Country<<std::endl;
                 Europe.push_back(Country);
             }
-            //std::cout << line <<std::endl;
-            //std::cout <<"Constr:"<<Nom<<xg<<yh<<xd<<yb<<std::endl;
         }
     myfile.close();
     }
     else std::cout << "Unable to open file";
     return Europe;
 }
-std::string get_country(int X,int Y,std::vector<Country> continent)
+std::string get_country(int X,int Y,Continent continent)
 {
     std::string country="";
-    //std::string Nom;
-    //int xg,yh,xd,yb;
-    //std::stringstream ss;
-//    Country france=Country("France",200,324,513,6360);
-//    std::string line;
-//    std::ifstream myfile ("europe.txt");
-//    std::vector<Country> Europe;
-//    if (myfile.is_open())
-//    {
-////        getline (myfile,line);
-//        while ( getline (myfile,line) )
-//        {
-//            std::string Nom;
-//            int xg,yh,xd,yb;
-//            std::stringstream ss;
-//            replace(line.begin(), line.end(), ',', ' ');
-////            replace(line.begin(), line.end(), ',', ' ');
-//            ss<<line;
-//            ss>>Nom>>xg>>yh>>xd>>yb;
-//            if(!Nom.empty())
-//            {
-//                Country Country(Nom,xg,yh,xd,yb);
-//                std::cout<<"TEST SS:"<<Country<<std::endl;
-//                Europe.push_back(Country);
-//            }
-//            //std::cout << line <<std::endl;
-//            //std::cout <<"Constr:"<<Nom<<xg<<yh<<xd<<yb<<std::endl;
-//        }
-//    myfile.close();
-//    }
-//    else std::cout << "Unable to open file";
     std::vector<int> Pos;
-    for(auto & value: continent) {
-//        std::cout<<value<<std::endl;
-        //Pos=value.getPosition();
+    for(auto & value: continent.getCountries()) {
         if(X>=value.getPosition()[0] && X<=value.getPosition()[2]
            && Y>=value.getPosition()[1] && Y<=value.getPosition()[3])
         {
@@ -94,10 +58,21 @@ std::string get_country(int X,int Y,std::vector<Country> continent)
 
 
     }
-//    if(X>=200 && X<=324 && Y>=513 && Y<=636)
-//        country="France";
-
     return country;
+}
+
+sf::Sprite getSprite(sf::Texture& texture2,Display p)
+{
+    sf::Sprite sprite;
+    if (!texture2.loadFromFile(p.getImage()))
+    {
+        // error...
+        std::cerr<<"Failled to load player!!"<<std::endl;
+    }else
+    {
+        sprite.setTexture(texture2);
+    }
+    return sprite;
 }
 
 int main()
@@ -105,17 +80,20 @@ int main()
 
   sf::RenderWindow window(sf::VideoMode(940, 680,32),"Paradises Papers");
   std::string Name="";
-  std::vector<Country> Europe=get_Europe();
+  std::vector<Country> europe=get_Europe();
+  Continent Europe("Europe",0,0,0,0,europe);
+  Europe.setImage("Europe.png");
+  Journalist reporter("Nadia et Pete","Reporter.png");
+  sf::Texture texture2;
+  sf::Sprite reporter_sprite=getSprite(texture2,reporter);
 
 
   sf::Texture imageSource;
-  if(!imageSource.loadFromFile("Europe.png", sf::IntRect(10, 10, 2200,1760)))
-      return EXIT_FAILURE;
-  sf::Sprite imageSprite;
+  sf::Sprite imageSprite=getSprite(imageSource,Europe);
   imageSprite.setTexture(imageSource);
   imageSprite.scale(0.5,0.5);
-  sf::Texture texture;
-  texture.setSmooth(true);
+  //sf::Texture texture;
+  //texture.setSmooth(true);
 
   while(window.isOpen())
   {
@@ -166,8 +144,9 @@ int main()
         }
 
      }
-
+     reporter_sprite.setPosition(sf::Vector2f(0,25));
      window.draw(imageSprite);
+     window.draw(reporter_sprite);
      window.display();
   }
 
