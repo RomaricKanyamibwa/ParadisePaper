@@ -139,8 +139,8 @@ int Game(sf::RenderWindow& window)
                 std::cout <<"w:"<< width <<" h:"<< height <<std::endl;
                 //float constante = 940/846.0;
                 //if(width/float(height)!=constante)
-                  //  window.setSize(sf::Vector2u(width, constante*width));
-
+                //  window.setSize(sf::Vector2u(width, constante*width));
+                break;
 
             }
             // we don't process other types of events

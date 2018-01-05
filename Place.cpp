@@ -16,6 +16,15 @@ Place::Place(std::string Nom, int xg, int yh, int xd, int yb)
     Position.push_back(yb);
 }
 
+Place::Place(std::string Nom, int xg, int yh, int xd, int yb,std::string Image):Display(Image)
+{
+    Name = Nom;
+    Position.push_back(xg);
+    Position.push_back(yh);
+    Position.push_back(xd);
+    Position.push_back(yb);
+}
+
 Place::~Place () { }
 
 //

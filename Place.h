@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "Display.h"
+#include "Person.h"
 
 
 /**
@@ -25,6 +26,7 @@ public:
    */
   Place ();
   Place (std::string Nom, int xg, int yh, int xd, int yb);
+  Place (std::string Nom, int xg, int yh, int xd, int yb,std::string Image);
 
   /**
    * Empty Destructor
@@ -81,6 +83,7 @@ private:
 
   std::string Name;
   std::vector<int> Position;
+  Person pers;
 public:
 
 
@@ -138,6 +141,22 @@ public:
    */
   std::vector<int> getPosition ()   {
     return Position;
+  }
+
+  /**
+   * Set the value of pers
+   * @param new_var the new value of pers
+   */
+  void setPerson (Person new_var)   {
+      pers = new_var;
+  }
+
+  /**
+   * Get the value of pers
+   * @return the value of pers
+   */
+  Person getPerson ()   {
+    return pers;
   }
 private:
 

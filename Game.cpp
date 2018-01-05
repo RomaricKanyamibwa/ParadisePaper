@@ -7,10 +7,22 @@
 #include "Global_Define.h"
 #include "MainMenu.h"
 #include "iostream"
-// Constructors/Destructors
-//
+#include "GameInformation.h"
 
+//Global Variables
+//
 Journalist Player;
+int playing;
+int CURRENT_HEIGHT=768;
+int CURRENT_WIDTH=1024;
+std::string continent=WORLD;
+GameInformation DataPlayer;
+Place World("World",0,0,0,0,IMAGE_WORLD);
+Journalist reporter1(REPORTER_1,IMAGE_REPORTER_1);
+
+
+ // Constructors/Destructors
+//
 Game::Game () {
 initAttributes();
 }
@@ -29,19 +41,24 @@ Game::~Game () { }
 // Other methods
 //
 
+    unsigned int Game::Game_WIDTH=1024;
+    unsigned int Game::Game_HEIGHT=768;
 
 void Game::Start(void)
 {
+    playing=0;
 	if(_gameState != Uninitialized)
 		return;
-
 	_mainWindow.create(sf::VideoMode(1024,768,32),"Paradise Papers");
 
 	_gameState= Game::ShowingStart;
 
 	while(!IsExiting())
 	{
-		GameLoop();
+	    if(playing)
+            GameLoop(DataPlayer.getCurrent_Place(),DataPlayer.getCurrent_Place().getPerson());
+        else
+            GameLoop(World,reporter1);
 	}
 
 	_mainWindow.close();
@@ -55,8 +72,38 @@ bool Game::IsExiting()
 		return false;
 }
 
-void Game::GameLoop()
+void Game::GameLoop(Place place,Person pers)
 {
+    std::string Name="";
+    //std::vector<Country> europe=get_Europe();
+    //Continent Europe(EUROPE,0,0,0,0,europe);
+    //Europe.setImage(IMAGE_EUROPE);
+    sf::Texture texture;
+    sf::Texture texture2;
+    sf::Texture dialog_texture;
+
+    sf::Sprite player_sprite;
+    sf::Sprite reporter_sprite=getSprite(texture2,pers);
+    sf::Sprite dialog_sprite;
+    if(playing==1)
+    {
+        player_sprite=getSprite(texture,DataPlayer.getPlayer());
+
+//        if(Player.getSex()==Person::Female)
+//            player_sprite.scale(REPORTER_1_WIDTH/FEMALE_WIDTH,REPORTER_1_HEIGTH/FEMALE_HEIGHT);
+//        else
+//            player_sprite.scale(REPORTER_1_WIDTH/MALE_WIDTH,REPORTER_1_HEIGTH/MALE_HEIGHT);
+        //std::cout<<"PLAYER_SPRITE"<<std::endl;
+    }
+    if(continent==WORLD)
+    {
+        dialog_sprite=getSprite(dialog_texture,Display(IMAGE_DIALOG2));
+    }
+
+    sf::Texture imageSource;
+    sf::Sprite imageSprite=getSprite(imageSource,place);
+    //imageSprite.setTexture(imageSource);
+    //imageSprite.scale(0.5,0.5);
 	switch(_gameState)
 	{
 		case Game::ShowingMenu:
@@ -73,33 +120,75 @@ void Game::GameLoop()
             {
                 Player=CreatePerson();
                 std::cout<<"PlayerName:"<<Player.getName()<<std::endl;
-                _mainWindow.create(sf::VideoMode(1024,768,32),"Paradise Papers");
+                //_mainWindow.create(sf::VideoMode(1024,768,32),"Paradise Papers");
                 break;
             }
         case Game::Introduction:
             {
-                _mainWindow.create(sf::VideoMode(GlOBE_WIDTH,GlOBE_HEIGHT,32),"Paradise Papers");
+                _mainWindow.create(sf::VideoMode(WORLD_WIDTH,WORLD_HEIGHT,32),"Paradise Papers");
+                World.setPerson(reporter1);
+                DataPlayer=GameInformation(Player,World);
+                CURRENT_HEIGHT=WORLD_HEIGHT;
+                CURRENT_WIDTH=WORLD_WIDTH;
                 ShowIntro();
                 std::cout<<"DisplayIntro"<<std::endl;
-                _mainWindow.create(sf::VideoMode(1024,768,32),"Paradise Papers");
+                //_mainWindow.create(sf::VideoMode(1024,768,32),"Paradise Papers");
+                //_mainWindow.clear(sf::Color(0,0,0));
+
                 break;
             }
 		case Game::Playing:
 			{
+			    if(playing==0)
+                    {
+                        playing=1;
+                        std::cout<<"PLAYING"<<std::endl;
+                    }
 				sf::Event currentEvent;
-				while(_mainWindow.pollEvent(currentEvent))
-					{
-					_mainWindow.clear(sf::Color(0,0,0));
-					_mainWindow.display();
+				while((_mainWindow.pollEvent(currentEvent))&&_gameState==Game::Playing)
+                {
+                    _mainWindow.clear(sf::Color(0,0,0));
 					if(currentEvent.type == sf::Event::Closed) _gameState = Game::Exiting;
 
 					if(currentEvent.type == sf::Event::KeyPressed)
-						{
-							if(currentEvent.key.code == sf::Keyboard::Escape) ShowMenu();
-						}
-					}
+                    {
+                        if(currentEvent.key.code == sf::Keyboard::Escape) ShowMenu();
+                    }
+
+                    if(sf::Event::MouseButtonPressed==currentEvent.type)
+                    {
+                        sf::Vector2i localPosition = sf::Mouse::getPosition(_mainWindow);
+                        std::cout <<"X:"<< localPosition.x <<" Y:"<< localPosition.y <<std::endl;
+                        sf::Vector2u size = _mainWindow.getSize();
+                        //std::cout<<"Country:"<<get_country(localPosition.x ,localPosition.y,Europe)<<std::endl;
+                        unsigned int width = size.x;
+                        unsigned int height = size.y;
+                        std::cout <<"w:"<< width <<" h:"<< height <<std::endl;
+                    }
+                    reporter_sprite.setPosition(sf::Vector2f(0,CURRENT_HEIGHT-REPORTER_1_HEIGTH));
+
+                    _mainWindow.draw(imageSprite);
+                    _mainWindow.draw(reporter_sprite);
+                    if(playing)
+                    {
+                        player_sprite.setPosition(sf::Vector2f(CURRENT_WIDTH-MALE_WIDTH,CURRENT_HEIGHT-REPORTER_1_HEIGTH));
+                        _mainWindow.draw(player_sprite);
+                    }
+                    if(continent==WORLD)
+                    {
+                        dialog_sprite.setPosition(sf::Vector2f(REPORTER_1_WIDTH+250,CURRENT_HEIGHT-DIALOG2_HEIGHT));
+                        _mainWindow.draw(dialog_sprite);
+                    }
+                    _mainWindow.display();
+                }
+
 				break;
 			}
+        case Game::Exiting:
+            {
+                _mainWindow.close();
+                break;
+            }
         default:
             {
                 break;
@@ -138,9 +227,9 @@ void Game::ShowIntro()
 {
 	StartScreen startScreen;
 	if(Player.getSex()==Person::Female)
-        startScreen.ShowIntro(_mainWindow,IMAGE_FEMALE_GLOBE);
+        startScreen.ShowIntro(_mainWindow,IMAGE_FEMALE_WORLD);
     else
-        startScreen.ShowIntro(_mainWindow,IMAGE_MALE_GlOBE);
+        startScreen.ShowIntro(_mainWindow,IMAGE_MALE_WORLD);
 	_gameState = Game::Playing;
 }
 

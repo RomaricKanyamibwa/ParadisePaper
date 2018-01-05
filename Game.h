@@ -4,6 +4,8 @@
 
 #include <string>
 #include "Journalist.h"
+#include "Person.h"
+#include "Place.h"
 
 
 /**
@@ -53,7 +55,8 @@ protected:
   //
 
 public:
-
+      static unsigned int Game_WIDTH;
+      static unsigned int Game_HEIGHT;
 
   // Protected attribute accessor methods
   //
@@ -61,7 +64,6 @@ public:
 protected:
 
 public:
-
 
   // Protected attribute accessor methods
   //
@@ -78,10 +80,11 @@ private:
   static GameState _gameState;
   static sf::RenderWindow _mainWindow;
   //player
-  static Journalist player;
+
 
   // Private attributes
   //
+
 
 public:
 
@@ -130,27 +133,44 @@ public:
 
   // Private attribute accessor methods
   //
-    /**
-   * Set the value of player
-   * @param new_var the new value of player
+
+
+  /**
+   * Set the value of Game_WIDTH
+   * @param new_var the new value of Game_WIDTH
    */
-  void setplayer (Journalist new_var)   {
-      player = new_var;
+  void setGame_WIDTH (unsigned int new_var)   {
+      Game::Game_WIDTH = new_var;
   }
 
   /**
-   * Get the value of player
-   * @return the value of player
+   * Get the value of Game_WIDTH
+   * @return the value of Game_WIDTH
    */
-  Journalist getplayer ()   {
-    return player;
+  unsigned int getGame_WIDTH ()   {
+    return Game::Game_WIDTH;
   }
 
+  /**
+   * Set the value of Game_HEIGHT
+   * @param new_var the new value of Game_HEIGHT
+   */
+  void setGame_HEIGHT (unsigned int new_var)   {
+      Game::Game_HEIGHT = new_var;
+  }
+
+  /**
+   * Get the value of Game_HEIGHT
+   * @return the value of Game_HEIGHT
+   */
+  unsigned int getGame_HEIGHT ()   {
+    return Game::Game_HEIGHT;
+  }
 private:
 
   void initAttributes () ;
   static bool IsExiting();
-  static void GameLoop();
+  static void GameLoop(Place p,Person pers);
   static void ShowStartScreen();
   static void ShowMenu();
   static void ShowIntro();

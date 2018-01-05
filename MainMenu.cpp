@@ -88,7 +88,7 @@ MainMenu::MenuResult MainMenu::ShowCreate(sf::RenderWindow& window)
 
 	//Setup clickable regions
 
-	//Play menu item coordinates
+	//MaleCharacter coordinates
 	MenuItem MaleButton;
 	MaleButton.rect.top= 35;
 	MaleButton.rect.height = 494;
@@ -96,7 +96,7 @@ MainMenu::MenuResult MainMenu::ShowCreate(sf::RenderWindow& window)
 	MaleButton.rect.width = 180;
 	MaleButton.action = Male;
 
-	//Exit menu item coordinates
+	//FemaleCharacter item coordinates
 	MenuItem FemaleButton;
 	FemaleButton.rect.left = 600;
 	FemaleButton.rect.height = 494;
