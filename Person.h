@@ -6,8 +6,6 @@
 #include <vector>
 #include "Display.h"
 
-
-
 /**
   * class Person
   *
@@ -16,6 +14,10 @@
 class Person : public Display
 {
 public:
+    typedef enum
+    {
+        Male,Female
+    }Sex;
 
   // Constructors/Destructors
   //
@@ -26,6 +28,7 @@ public:
    */
   Person ();
   Person (std::string Name,std::string Image):Display(Image),Name(Name){};
+  Person (std::string Name,std::string Image,Sex sex):Display(Image),Name(Name),_Sex(sex){};
 
   /**
    * Empty Destructor
@@ -81,6 +84,8 @@ private:
   //
 
   std::string Name;
+  Sex _Sex;
+  int Money;
   //std::string Image;
 public:
 
@@ -98,6 +103,23 @@ public:
 
 
   /**
+   * Set the value of _Sex
+   * @param new_var the new value of _Sex
+   */
+  void setSex (Sex new_var)   {
+      _Sex = new_var;
+  }
+
+  /**
+   * Get the value of _Sex
+   * @return the value of _Sex
+   */
+  Sex getSex ()   {
+    return _Sex;
+  }
+
+
+  /**
    * Set the value of Name
    * @param new_var the new value of Name
    */
@@ -111,6 +133,32 @@ public:
    */
   std::string getName ()   {
     return Name;
+  }
+
+
+
+  /**
+   * Set the value of Money
+   * @param new_var the new value of Money
+   */
+  void setMoney (int new_var)   {
+      Money = new_var;
+  }
+
+  /**
+   * Get the value of Money
+   * @return the value of Money
+   */
+  int getMoney ()   {
+    return Money;
+  }
+  /**
+   * Get the value of Money
+   * @return the value of Money
+   */
+  std::string MoneyToString ()   {
+    std::string tmpstring=Money+"€";
+    return tmpstring;
   }
 
 //  /**

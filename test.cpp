@@ -1,13 +1,18 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>
+//#include <tchar.h>
 #include<iostream>
 #include<string>
 #include <fstream>
 //#include "Place.h"
 //#include "Country.h"
-#include "Journalist.h"
-#include "Continent.h"
+#include "Global_Define.h"
+#include "Game.h"
+#include "StartScreen.h"
+#include "MainMenu.h"
+//#include "Journalist.h"
+//#include "Continent.h"
 #include <sstream>      // std::stringstream
 
 std::ostream& operator<<(std::ostream & out, Country p)
@@ -75,10 +80,10 @@ sf::Sprite getSprite(sf::Texture& texture2,Display p)
     return sprite;
 }
 
-int main()
+int Game(sf::RenderWindow& window)
 {
 
-  sf::RenderWindow window(sf::VideoMode(940, 680,32),"Paradises Papers");
+  //window(sf::VideoMode(940, 680,32),"Paradises Papers");
   std::string Name="";
   std::vector<Country> europe=get_Europe();
   Continent Europe("Europe",0,0,0,0,europe);
@@ -153,28 +158,13 @@ int main()
   return EXIT_SUCCESS;
 }
 
-//int main()
-//{
-//
-//    // Display the list of all the video modes available for fullscreen
-//    std::vector modes = sf::VideoMode::getFullscreenModes();
-//
-//    // Display each mode
-//    for (std::size_t i = 0; i < modes.size(); ++i)
-//    {
-//        sf::VideoMode mode = modes[i];
-//        std::cout << "Mode #" << i << "\t"
-//                  << mode.width << "x" << mode.height << " \t "
-//                  << mode.bitsPerPixel << " bpp" << std::endl;
-//    }
-//
-//    // Get and display desktop mode
-//    sf::VideoMode mode = sf::VideoMode::getDesktopMode();
-//    std::cout << "Desktop"  << "\t"
-//              << mode.width << "x" << mode.height << " \t "
-//              << mode.bitsPerPixel << " bpp" << std::endl;
-//
-//    // End of application
-//    return 0;
-//}
+
+int main(int argc,char* argv[])
+{
+	Game::Start();
+
+	return 0;
+}
+
+
 

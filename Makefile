@@ -2,13 +2,14 @@ CC=g++ -g
 CCFLAGS= -Wall -Werror -std=c++11
 LIBFLAGS= -lsfml-graphics -lsfml-window -lsfml-system
 SRC= $(wildcard *.cpp)
+HDR= $(wildcard *.h)
 OBJ= $(SRC:.cpp=.o)
 EXEC= ParadisePaper
 
 
 all: $(EXEC)
 
-test.o:Places.h Pays.h
+test.o: $(HDR)
 
 $(EXEC): $(OBJ)
 	$(CC) $^ -o $@   $(LIBFLAGS)
