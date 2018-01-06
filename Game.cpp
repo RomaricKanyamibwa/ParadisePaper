@@ -74,36 +74,41 @@ bool Game::IsExiting()
 
 void Game::GameLoop(Place place,Person pers)
 {
-    std::string Name="";
-    //std::vector<Country> europe=get_Europe();
-    //Continent Europe(EUROPE,0,0,0,0,europe);
-    //Europe.setImage(IMAGE_EUROPE);
+    std::string Name="";;
+    float money_scale=0.2;
+    float mission_width_scale=MONEY_WIDTH/((float)MISSIONS_WIDTH)*money_scale;
+    float mission_height_scale=MONEY_HEIGHT/((float)MISSIONS_HEIGHT)*money_scale;
     sf::Texture texture;
     sf::Texture texture2;
     sf::Texture dialog_texture;
+    sf::Texture money_texture;
+    sf::Texture missions_texture;
 
     sf::Sprite player_sprite;
     sf::Sprite reporter_sprite=getSprite(texture2,pers);
     sf::Sprite dialog_sprite;
+    sf::Sprite money_sprite;
+    sf::Sprite missions_sprite;
     if(playing==1)
     {
         player_sprite=getSprite(texture,DataPlayer.getPlayer());
-
-//        if(Player.getSex()==Person::Female)
-//            player_sprite.scale(REPORTER_1_WIDTH/FEMALE_WIDTH,REPORTER_1_HEIGTH/FEMALE_HEIGHT);
-//        else
-//            player_sprite.scale(REPORTER_1_WIDTH/MALE_WIDTH,REPORTER_1_HEIGTH/MALE_HEIGHT);
-        //std::cout<<"PLAYER_SPRITE"<<std::endl;
+        money_sprite=getSprite(money_texture,Display(IMAGE_MONEY));
+        missions_sprite=getSprite(missions_texture,Display(IMAGE_MISSIONS));
+        money_sprite.scale(money_scale,money_scale);
+        missions_sprite.scale(mission_width_scale,mission_height_scale);
+        money_texture.setSmooth(true);
+        missions_texture.setSmooth(true);
+        texture.setSmooth(true);
     }
     if(continent==WORLD)
     {
-        dialog_sprite=getSprite(dialog_texture,Display(IMAGE_DIALOG2));
+        dialog_sprite=getSprite(dialog_texture,Display(IMAGE_DIALOG3));
+        dialog_texture.setSmooth(true);
     }
 
     sf::Texture imageSource;
     sf::Sprite imageSprite=getSprite(imageSource,place);
-    //imageSprite.setTexture(imageSource);
-    //imageSprite.scale(0.5,0.5);
+    imageSource.setSmooth(true);
 	switch(_gameState)
 	{
 		case Game::ShowingMenu:
@@ -120,7 +125,6 @@ void Game::GameLoop(Place place,Person pers)
             {
                 Player=CreatePerson();
                 std::cout<<"PlayerName:"<<Player.getName()<<std::endl;
-                //_mainWindow.create(sf::VideoMode(1024,768,32),"Paradise Papers");
                 break;
             }
         case Game::Introduction:
@@ -132,8 +136,6 @@ void Game::GameLoop(Place place,Person pers)
                 CURRENT_WIDTH=WORLD_WIDTH;
                 ShowIntro();
                 std::cout<<"DisplayIntro"<<std::endl;
-                //_mainWindow.create(sf::VideoMode(1024,768,32),"Paradise Papers");
-                //_mainWindow.clear(sf::Color(0,0,0));
 
                 break;
             }
@@ -172,11 +174,16 @@ void Game::GameLoop(Place place,Person pers)
                     if(playing)
                     {
                         player_sprite.setPosition(sf::Vector2f(CURRENT_WIDTH-MALE_WIDTH,CURRENT_HEIGHT-REPORTER_1_HEIGTH));
+                        money_sprite.setPosition(sf::Vector2f(CURRENT_WIDTH-MONEY_WIDTH*money_scale,0));
+                        missions_sprite.setPosition(sf::Vector2f(CURRENT_WIDTH-MISSIONS_WIDTH*mission_width_scale-10,MONEY_HEIGHT*money_scale+1));
                         _mainWindow.draw(player_sprite);
+                        _mainWindow.draw(missions_sprite);
+                        _mainWindow.draw(money_sprite);
                     }
                     if(continent==WORLD)
                     {
-                        dialog_sprite.setPosition(sf::Vector2f(REPORTER_1_WIDTH+250,CURRENT_HEIGHT-DIALOG2_HEIGHT));
+                        dialog_sprite.setPosition(sf::Vector2f(REPORTER_1_WIDTH,CURRENT_HEIGHT-DIALOG3_HEIGHT));
+                        //std::cout<<"DIALOG"<<std::endl;
                         _mainWindow.draw(dialog_sprite);
                     }
                     _mainWindow.display();
@@ -259,7 +266,7 @@ Journalist Game::CreatePerson()
             break;
         }
     default:
-            return Journalist("","");
+            return Game::CreatePerson();
             break;
 	}
 }

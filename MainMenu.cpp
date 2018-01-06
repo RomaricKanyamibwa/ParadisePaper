@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Global_Define.h"
 
+bool createcharacter=false;
 // Constructors/Destructors
 //
 
@@ -121,6 +122,7 @@ MainMenu::MenuResult MainMenu::ShowCreate(sf::RenderWindow& window)
 	window.draw(sprite_ross);
 
 	window.display();
+	createcharacter=true;
 
 	return GetMenuResponse(window);
 }
@@ -151,6 +153,7 @@ MainMenu::MenuResult MainMenu::HandleClick(int x, int y)
 MainMenu::MenuResult  MainMenu::GetMenuResponse(sf::RenderWindow& window)
 {
 	sf::Event menuEvent;
+	MainMenu::MenuResult res;
 
 	while(42 != 43)
 	{
@@ -160,7 +163,14 @@ MainMenu::MenuResult  MainMenu::GetMenuResponse(sf::RenderWindow& window)
 			if(menuEvent.type == sf::Event::MouseButtonPressed)
 			{
 			    std::cout<<"X:"<<menuEvent.mouseButton.x<<",Y:"<<menuEvent.mouseButton.y<<std::endl;
-				return HandleClick(menuEvent.mouseButton.x,menuEvent.mouseButton.y);
+				res=HandleClick(menuEvent.mouseButton.x,menuEvent.mouseButton.y);
+				if(createcharacter)
+                {
+                    if(res==MainMenu::Female||MainMenu::Male==res)
+                        return res;
+                }
+                else
+                    return res;
 			}
 			if(menuEvent.type == sf::Event::Closed)
 			{

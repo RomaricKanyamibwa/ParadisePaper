@@ -21,10 +21,16 @@
 #define IMAGE_DIALOG2 "images/Dialog2.png"
 #define DIALOG2_WIDTH 346
 #define DIALOG2_HEIGHT 145
+#define IMAGE_DIALOG3 "images/Dialog3.png"
+#define DIALOG3_WIDTH 846
+#define DIALOG3_HEIGHT 180
 #define IMAGE_MONEY "images/Money.png"
 #define MONEY_WIDTH 260
 #define MONEY_HEIGHT 330
-#define STARTS_CREEN "images/StartScreen.jpg"
+#define IMAGE_MISSIONS "images/Missions.png"
+#define MISSIONS_WIDTH 140
+#define MISSIONS_HEIGHT 134
+#define START_SCREEN "images/StartScreen.jpg"
 #define PLAYER_SCREEN "images/PlayerScreen.png"
 #define WORLD_WIDTH 1362.0
 #define EUROPE_WIDTH 2200.0
