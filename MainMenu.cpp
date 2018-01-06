@@ -84,8 +84,9 @@ MainMenu::MenuResult MainMenu::ShowCreate(sf::RenderWindow& window)
 	sprite2.setTexture(person_f);
 	sprite3.setTexture(choice_im);
 	sprite_rania.setTexture(name_f);
+	name_f.setSmooth(true);
 	sprite_ross.setTexture(name_m);
-
+	name_m.setSmooth(true);
 
 	//Setup clickable regions
 

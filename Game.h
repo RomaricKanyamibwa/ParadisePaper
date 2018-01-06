@@ -3,6 +3,7 @@
 #define GAME_H
 
 #include <string>
+#include <SFML/Audio.hpp>
 #include "Journalist.h"
 #include "Person.h"
 #include "Place.h"
@@ -33,6 +34,9 @@ public:
 
   // Static Public attributes
   //
+  static sf::Text text;
+  static sf::Font font;
+  static sf::Music music;
 
   // Public attributes
   //
@@ -168,13 +172,17 @@ public:
   }
 private:
 
-  void initAttributes () ;
+  static void initAttributes () ;
   static bool IsExiting();
   static void GameLoop(Place p,Person pers);
   static void ShowStartScreen();
   static void ShowMenu();
   static void ShowIntro();
   static Journalist CreatePerson();
+  static void Playing_func(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::Sprite& missions_sprite);
+  static void MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::Sprite& missions_sprite);
+  static void WriteDialogBox(std::string msg);
+
 
 };
 

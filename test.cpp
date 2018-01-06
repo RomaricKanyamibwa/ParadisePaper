@@ -26,7 +26,7 @@ std::ostream& operator<<(std::ostream & out, Country p)
 std::vector<Country> get_Europe()
 {
     std::string line;
-    std::ifstream myfile ("europe.txt");
+    std::ifstream myfile (EUROPE_FILE);
     std::vector<Country> Europe;
     if (myfile.is_open())
     {
@@ -44,9 +44,10 @@ std::vector<Country> get_Europe()
                 Europe.push_back(Country);
             }
         }
+    std::cout<<"Europe Loaded sucessfully"<<std::endl;
     myfile.close();
     }
-    else std::cout << "Unable to open file";
+    else std::cerr << "Unable to open file";
     return Europe;
 }
 std::string get_country(int X,int Y,Continent continent)

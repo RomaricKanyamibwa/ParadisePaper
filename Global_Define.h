@@ -37,8 +37,10 @@
 #define WORLD_HEIGHT 629.0
 #define EUROPE_HEIGHT 1790.0
 #define EUROPE "Europe"
+#define EUROPE_FILE "data/europe.txt"
 #define WORLD "WORLD"
 #define ASIA "Asia"
+#define ASIA_FILE "data/asia.txt"
 #define OCEANIA "Oceania"
 #define AFRICA "Africa"
 #define SOUTH_AMERICA "South America"
@@ -52,9 +54,17 @@
 #define REPORTER_3 "Colette"
 #define REPORTER_4 "James"
 
+#define MUSIC_MAIN "sounds/TheChain.ogg"
+
+#define FONT_FILE "data/Belgrano-Regular.ttf"
+
 
 #include "Continent.h"
-
+//
+//extern sf::Font font;
+//extern sf::Music music;
+extern short int MAX_DIALOG_PHRASE_LENGTH;
+extern short int MAX_PHRASES;
 extern std::ostream& operator<<(std::ostream & out, Country p);
 extern std::vector<Country> get_Europe();
 extern std::string get_country(int X,int Y,Continent continent);

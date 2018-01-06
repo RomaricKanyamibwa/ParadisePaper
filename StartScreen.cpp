@@ -42,11 +42,12 @@ void StartScreen::Show(sf::RenderWindow & renderWindow)
 		while(renderWindow.pollEvent(event))
 		{
 			if(event.type == sf::Event::EventType::KeyPressed
-				|| event.type == sf::Event::EventType::MouseButtonPressed
-				|| event.type == sf::Event::EventType::Closed )
+				|| event.type == sf::Event::EventType::MouseButtonPressed)
 			{
 				return;
 			}
+			else if(event.type == sf::Event::EventType::Closed )
+                renderWindow.close();
 		}
 	}
 }
@@ -60,6 +61,7 @@ void StartScreen::ShowIntro(sf::RenderWindow & renderWindow,std::string file)
 
 	sf::Sprite sprite;
 	sprite.setTexture(image);
+	image.setSmooth(true);
 
 	renderWindow.draw(sprite);
 	renderWindow.display();

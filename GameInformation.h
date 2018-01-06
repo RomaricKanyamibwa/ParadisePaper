@@ -4,6 +4,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 #include "Journalist.h"
 #include "Country.h"
 
@@ -84,9 +85,9 @@ private:
   float Score;
   Journalist Player;
   Place Current_Place;
-  unsigned char Visited_Countries;
-  unsigned char Completed_Missions;
-  unsigned char Total_missions;
+  unsigned int Visited_Countries;
+  unsigned int Completed_Missions;
+  unsigned int Total_missions;
   std::vector<Country> Visited_Places;
 public:
 
@@ -155,7 +156,7 @@ public:
    * Set the value of Visited_Countries
    * @param new_var the new value of Visited_Countries
    */
-  void setVisited_Countries (unsigned char new_var)   {
+  void setVisited_Countries (unsigned int new_var)   {
       Visited_Countries = new_var;
   }
 
@@ -163,7 +164,7 @@ public:
    * Get the value of Visited_Countries
    * @return the value of Visited_Countries
    */
-  unsigned char getVisited_Countries ()   {
+  unsigned int getVisited_Countries ()   {
     return Visited_Countries;
   }
 
@@ -171,7 +172,8 @@ public:
    * Set the value of Completed_Missions
    * @param new_var the new value of Completed_Missions
    */
-  void setCompleted_Missions (unsigned char new_var)   {
+  void setCompleted_Missions (unsigned int new_var)   {
+      std::cout<<"GAMEINFO:new_val="<<new_var<<std::endl;
       Completed_Missions = new_var;
   }
 
@@ -179,7 +181,7 @@ public:
    * Get the value of Completed_Missions
    * @return the value of Completed_Missions
    */
-  unsigned char getCompleted_Missions ()   {
+  unsigned int getCompleted_Missions ()   {
     return Completed_Missions;
   }
 
@@ -187,7 +189,8 @@ public:
    * Set the value of Total_missions
    * @param new_var the new value of Total_missions
    */
-  void setTotal_missions (unsigned char new_var)   {
+  void setTotal_missions (unsigned int new_var)   {
+      std::cout<<"GAMEINFO:new_val="<<new_var<<std::endl;
       Total_missions = new_var;
   }
 
@@ -195,7 +198,7 @@ public:
    * Get the value of Total_missions
    * @return the value of Total_missions
    */
-  unsigned char getTotal_missions ()   {
+  unsigned int getTotal_missions ()   {
     return Total_missions;
   }
 
