@@ -9,6 +9,8 @@
 #include "iostream"
 #include "GameInformation.h"
 #include <sstream>      // std::stringstream
+#include <SFML/Audio.hpp>
+
 
 //Global Variables
 //
@@ -38,7 +40,7 @@ unsigned int Game::Game_HEIGHT=768;
 unsigned int Game::Game_WIDTH=1024;
 Game::GameState Game::_gameState = Uninitialized;
 sf::RenderWindow Game::_mainWindow;
-sf::Music Game::music;
+//sf::Music Game::music;
 sf::Font Game::font;
 sf::Text Game::text;
 void setDataPlayer();
@@ -106,7 +108,7 @@ void Game::Playing_func(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
         // set the character size
         text.setCharacterSize(15);
         // set the color
-        text.setFillColor(sf::Color::Black);
+        text.setColor(sf::Color::Black);
         text.setPosition(sf::Vector2f(Game_WIDTH-(MONEY_WIDTH*money_scale+text.getCharacterSize()/2.0*money_string.size()),MONEY_HEIGHT*money_scale/2.2));
 
         player_sprite.setPosition(sf::Vector2f(Game_WIDTH-MALE_WIDTH,Game_HEIGHT-REPORTER_1_HEIGTH));
@@ -253,7 +255,7 @@ void Game::WriteDialogBox(std::string msg)
         // set the character size
         text.setCharacterSize(20);
         // set the color
-        text.setFillColor(sf::Color::White);
+        text.setColor(sf::Color::White);
         text.setPosition(sf::Vector2f(dialog_sprite.getPosition().x+70,dialog_sprite.getPosition().y+50));
         _mainWindow.draw(text);
 }
@@ -336,12 +338,12 @@ void Game::initAttributes () {
         std::cerr<<"FAILED TO LOAD FONT"<<std::endl;
     }else std::cout<<"FONT LOADED"<<std::endl;
 
-    if (!Game::music.openFromFile(MUSIC_MAIN))
-        std::cerr<<"ERROR Music failed to load"<<std::endl;
-    else
-        std::cout<<"MusicLoaded"<<std::endl;
-    Game::music.play();
-    Game::music.setLoop(true);
+    //if (!Game::music.openFromFile(MUSIC_MAIN))
+      //  std::cerr<<"ERROR Music failed to load"<<std::endl;
+    //else
+      //  std::cout<<"MusicLoaded"<<std::endl;
+    //Game::music.play();
+    //Game::music.setLoop(true);
 }
 
 void /*Game::*/setDataPlayer()
