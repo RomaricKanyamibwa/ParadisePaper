@@ -47,14 +47,62 @@ std::vector<Country> get_Europe()
     std::cout<<"Europe Loaded sucessfully"<<std::endl;
     myfile.close();
     }
-    else std::cerr << "Unable to open file";
+    else std::cerr << "Unable to open file"<<std::endl;
     return Europe;
 }
+
+std::vector<Continent> get_Continents()
+{
+    std::string line;
+    std::ifstream myfile (WORLD_FILE);
+    std::vector<Continent> Continents;
+    if (myfile.is_open())
+    {
+        while ( getline (myfile,line) )
+        {
+            std::string Nom;
+            int xg=0,yh=0,xd=0,yb=0;
+            std::stringstream ss;
+            replace(line.begin(), line.end(), ',', ' ');
+            ss<<line;
+            ss>>Nom>>xg>>yh>>xd>>yb;
+            std::cout<<"Continent:"<<Nom<<std::endl;
+            if(!Nom.empty())
+            {
+                Continent continent(Nom,xg,yh,xd,yb);
+                Continents.push_back(continent);
+            }
+        }
+    std::cout<<"Continents Loaded sucessfully"<<std::endl;
+    myfile.close();
+    }
+    else std::cerr << "Unable to open file "<<WORLD_FILE<<std::endl;
+    return Continents;
+}
+
 std::string get_country(int X,int Y,Continent continent)
 {
     std::string country="";
     std::vector<int> Pos;
     for(auto & value: continent.getCountries()) {
+        if(X>=value.getPosition()[0] && X<=value.getPosition()[2]
+           && Y>=value.getPosition()[1] && Y<=value.getPosition()[3])
+        {
+            country=value.getName();
+            break;
+        }
+
+
+    }
+    return country;
+}
+
+
+std::string get_continent(int X,int Y,std::vector<Continent> continents)
+{
+    std::string country="";
+    std::vector<int> Pos;
+    for(auto & value: continents) {
         if(X>=value.getPosition()[0] && X<=value.getPosition()[2]
            && Y>=value.getPosition()[1] && Y<=value.getPosition()[3])
         {

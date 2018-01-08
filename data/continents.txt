@@ -1,0 +1,4 @@
+Europe 510,71,652,179
+Amerique_du_Nord 29,35,315,301
+Afrique 487,216,744,481
+Amerique_du_Sud 0,0,0,0

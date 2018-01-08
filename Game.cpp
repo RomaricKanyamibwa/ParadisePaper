@@ -22,6 +22,7 @@ short int MAX_DIALOG_PHRASE_LENGTH=std::string("Please choose a Continent AAAAAA
 GameInformation DataPlayer;
 Place World("World",0,0,0,0,IMAGE_WORLD);
 std::vector<Country> europe=get_Europe();
+std::vector<Continent> continents=get_Continents();
 Continent Europe("Europe",0,0,0,0,europe);
 Journalist reporter1(REPORTER_1,IMAGE_REPORTER_1);
 
@@ -226,6 +227,7 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
         {
             sf::Vector2i localPosition = sf::Mouse::getPosition(_mainWindow);
             std::cout <<"X:"<< localPosition.x <<" Y:"<< localPosition.y <<std::endl;
+            std::cout<<"Continent:"<<get_continent(localPosition.x,localPosition.y,continents)<<std::endl;
             sf::Vector2u size = _mainWindow.getSize();
             //std::cout<<"Country:"<<get_country(localPosition.x ,localPosition.y,Europe)<<std::endl;
             unsigned int width = size.x;
@@ -242,7 +244,7 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
             dialog_sprite.setPosition(sf::Vector2f(REPORTER_1_WIDTH,Game_HEIGHT-DIALOG3_HEIGHT));
             //std::cout<<"DIALOG"<<std::endl;
             _mainWindow.draw(dialog_sprite);
-            WriteDialogBox("Welcome "+DataPlayer.getPlayer().getName()+".\nPlease choose a Continent.");
+            WriteDialogBox("Welcome "+DataPlayer.getPlayer().getName()+".\n"+PHRASE_EXPLORE+" Glencore.\n"+PHRASE_EXPLORE2);
         }
         _mainWindow.display();
     }
