@@ -1,6 +1,6 @@
 CC=g++ -g
 CCFLAGS= -Wall -Werror -std=c++11
-LIBFLAGS= -lsfml-graphics -lsfml-window -lsfml-system
+LIBFLAGS= -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 SRC= $(wildcard *.cpp)
 HDR= $(wildcard *.h)
 OBJ= $(SRC:.cpp=.o)

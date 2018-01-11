@@ -41,7 +41,7 @@ unsigned int Game::Game_HEIGHT=768;
 unsigned int Game::Game_WIDTH=1024;
 Game::GameState Game::_gameState = Uninitialized;
 sf::RenderWindow Game::_mainWindow;
-//sf::Music Game::music;
+sf::Music Game::music;
 sf::Font Game::font;
 sf::Text Game::text;
 void setDataPlayer();
@@ -340,12 +340,12 @@ void Game::initAttributes () {
         std::cerr<<"FAILED TO LOAD FONT"<<std::endl;
     }else std::cout<<"FONT LOADED"<<std::endl;
 
-    //if (!Game::music.openFromFile(MUSIC_MAIN))
-      //  std::cerr<<"ERROR Music failed to load"<<std::endl;
-    //else
-      //  std::cout<<"MusicLoaded"<<std::endl;
-    //Game::music.play();
-    //Game::music.setLoop(true);
+    if (!Game::music.openFromFile(MUSIC_MAIN))
+        std::cerr<<"ERROR Music failed to load"<<std::endl;
+    else
+        std::cout<<"MusicLoaded"<<std::endl;
+    Game::music.play();
+    Game::music.setLoop(true);
 }
 
 void /*Game::*/setDataPlayer()
