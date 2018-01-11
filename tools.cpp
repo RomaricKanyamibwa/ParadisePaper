@@ -135,7 +135,7 @@ Multinational create_Multinational(std::string Name)
         Country siege;
         std::vector<Country> societes_ecran;
         if(getline (myfile,line))
-            image=line;
+            image="images/logo multinationales/"+line;
         else std::cerr << "Unable to get "<<Name<<"'s image."<<std::endl;
 
         if(getline (myfile,line))
@@ -268,7 +268,6 @@ int Game(sf::RenderWindow& window)
                 //if(width/float(height)!=constante)
                 //  window.setSize(sf::Vector2u(width, constante*width));
                 break;
-
             }
             // we don't process other types of events
             default:
@@ -288,9 +287,9 @@ int Game(sf::RenderWindow& window)
 
 int main(int argc,char* argv[])
 {
-    std::string str=PHRASE_EXPLORE2;
-    fit_string_in_dialog_box(str);
-    std::cout<<str<<"\nsize=>"<<str.size()<<std::endl;
+    //std::string str=PHRASE_EXPLORE2;
+    //fit_string_in_dialog_box(str);
+    //std::cout<<str<<"\nsize=>"<<str.size()<<std::endl;
 	Game::Start();
 
 

@@ -60,8 +60,7 @@
 #define FONT_FILE "data/Belgrano-Regular.ttf"
 #define MULTINATIONALS "data/MultiNational.txt"
 
-#define PHRASE_EXPLORE "Vous devez trouver le pays ou se situe le siege social de"
-#define PHRASE_EXPLORE2 "Pour cela choisissez d'abord un continent puis vous pourrez\nproposer un pays."
+#define PHRASE_EXPLORE "Vous devez trouver le pays ou se situe le siege social de _ .Pour cela choisissez d'abord un continent puis vous pourrez proposer un pays."
 
 #include "Continent.h"
 #include "Multinational.h"
@@ -80,4 +79,5 @@ extern std::string fit_string_in_dialog_box(std::string& str);
 extern Multinational create_Multinational(std::string Name);
 extern std::vector<Multinational> get_Multinationals();
 extern sf::Sprite getSprite(sf::Texture& texture2,Display p);
+extern void load_multinational();
 #endif // GLOBAL_DEFINE_H_INCLUDED

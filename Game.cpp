@@ -26,6 +26,10 @@ std::vector<Continent> continents=read_Continents();
 std::vector<Multinational> companies=get_Multinationals();
 Continent Europe("Europe",0,0,0,0,europe);
 Journalist reporter1(REPORTER_1,IMAGE_REPORTER_1);
+std::string Dialog=PHRASE_EXPLORE;
+/*static*/ sf::Texture Multinational_texture;
+/*static*/ sf::Sprite Multinational_sprite;
+
 
 sf::Sprite reporter_sprite;
 sf::Sprite imageSprite;
@@ -207,6 +211,7 @@ void Game::GameLoop(Place place,Person pers)
             }
 	}
 }
+
 void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::Sprite& missions_sprite)
 {
     if(playing==0)
@@ -243,10 +248,10 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
         if(continent==WORLD)
         {
             dialog_sprite.setPosition(sf::Vector2f(REPORTER_1_WIDTH,Game_HEIGHT-DIALOG3_HEIGHT));
-            //std::cout<<"DIALOG"<<std::endl;
             _mainWindow.draw(dialog_sprite);
-            WriteDialogBox("Welcome "+DataPlayer.getPlayer().getName()+".\n"+PHRASE_EXPLORE+" Glencore.\n"+PHRASE_EXPLORE2);
+            WriteDialogBox(Dialog);
         }
+        _mainWindow.draw(Multinational_sprite);
         _mainWindow.display();
     }
 }
@@ -298,6 +303,14 @@ void Game::ShowIntro()
     else
         startScreen.ShowIntro(_mainWindow,IMAGE_MALE_WORLD);
 	_gameState = Game::Playing;
+	//std::cout<<"Dialog:"<<Dialog<<std::endl;
+	Dialog="Hi "+DataPlayer.getPlayer().getName()+"."+Dialog.replace(Dialog.find("_"),1,companies[0].getName());
+	//std::cout<<"Dialog:"<<Dialog<<std::endl;
+    //Dialog.replace(Dialog.begin(),Dialog.end(),'\n',' ');
+    //std::cout<<"Dialog:"<<Dialog<<std::endl;
+    fit_string_in_dialog_box(Dialog);
+    //std::cout<<"Dialog:"<<Dialog<<std::endl;
+    load_multinational();
 }
 
 Journalist Game::CreatePerson()
@@ -335,7 +348,6 @@ Journalist Game::CreatePerson()
 void Game::initAttributes () {
     Europe.setImage(IMAGE_EUROPE);
     Game::text.setFont(font);
-
     if (!Game::font.loadFromFile(FONT_FILE))
     {
         std::cerr<<"FAILED TO LOAD FONT"<<std::endl;
@@ -358,3 +370,8 @@ void /*Game::*/setDataPlayer()
     Game::Game_WIDTH=WORLD_WIDTH;
 }
 
+void load_multinational()
+{
+    Multinational_sprite=getSprite(Multinational_texture,companies[0]);
+    Multinational_sprite.setPosition(sf::Vector2f(0,0));
+}
