@@ -22,7 +22,7 @@ short int MAX_DIALOG_PHRASE_LENGTH=std::string("Please choose a Continent AAAAAA
 GameInformation DataPlayer;
 Place World("World",0,0,0,0,IMAGE_WORLD);
 std::vector<Country> europe=get_Europe();
-std::vector<Continent> continents=get_Continents();
+std::vector<Continent> continents=read_Continents();
 Continent Europe("Europe",0,0,0,0,europe);
 Journalist reporter1(REPORTER_1,IMAGE_REPORTER_1);
 

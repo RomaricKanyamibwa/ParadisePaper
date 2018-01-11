@@ -51,7 +51,7 @@ std::vector<Country> get_Europe()
     return Europe;
 }
 
-std::vector<Continent> get_Continents()
+std::vector<Continent> read_Continents()
 {
     std::string line;
     std::ifstream myfile (WORLD_FILE);
@@ -107,6 +107,7 @@ std::string get_continent(int X,int Y,std::vector<Continent> continents)
            && Y>=value.getPosition()[1] && Y<=value.getPosition()[3])
         {
             country=value.getName();
+            std::replace( country.begin(), country.end(), '_', ' ');
             break;
         }
 

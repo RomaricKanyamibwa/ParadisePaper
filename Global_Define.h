@@ -59,7 +59,7 @@
 
 #define FONT_FILE "data/Belgrano-Regular.ttf"
 #define PHRASE_EXPLORE "Vous devez trouver le pays ou se situe le siege social de"
-#define PHRASE_EXPLORE2 "Pour cela choisissez d'abord un continent \n puis vous pourrez proposer un pays."
+#define PHRASE_EXPLORE2 "Pour cela choisissez d'abord un continent puis vous\npourrez proposer un pays."
 
 #include "Continent.h"
 //
@@ -69,7 +69,7 @@ extern short int MAX_DIALOG_PHRASE_LENGTH;
 extern short int MAX_PHRASES;
 extern std::ostream& operator<<(std::ostream & out, Country p);
 extern std::vector<Country> get_Europe();
-extern std::vector<Continent> get_Continents();
+extern std::vector<Continent> read_Continents();
 extern std::string get_country(int X,int Y,Continent continent);
 extern std::string get_continent(int X,int Y,std::vector<Continent> world);
 extern sf::Sprite getSprite(sf::Texture& texture2,Display p);
