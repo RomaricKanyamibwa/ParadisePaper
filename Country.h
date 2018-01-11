@@ -12,19 +12,6 @@
   * class Country
   *
   */
-//    file.open("europe.txt");
-//    list<Country> CountryEurope;
-//    while(getline(file,s))
-//    {
-//        if(!s.empty())string
-//            CountryEurope.push_back(Reaction(s));
-//    }
-//    for(const  auto& iter : CountryEurope)
-//    {
-//      std::cout << iter.normalize() << endl;
-//    }
-//    file.close();
-
 class Country : public Place
 {
 public:

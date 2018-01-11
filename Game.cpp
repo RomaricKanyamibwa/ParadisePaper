@@ -18,11 +18,12 @@ Journalist Player;
 int playing;
 short int MAX_PHRASES=4;
 std::string continent=WORLD;
-short int MAX_DIALOG_PHRASE_LENGTH=std::string("Please choose a Continent AAAAAAAAAAAAAAAAAAAAAAAAAAA.").length();
+std::string::size_type MAX_DIALOG_PHRASE_LENGTH=std::string("Please choose a Continent AAAAAAAAAAAAAAAAAAAAAAAAAAA.").size();
 GameInformation DataPlayer;
 Place World("World",0,0,0,0,IMAGE_WORLD);
 std::vector<Country> europe=get_Europe();
 std::vector<Continent> continents=read_Continents();
+std::vector<Multinational> companies=get_Multinationals();
 Continent Europe("Europe",0,0,0,0,europe);
 Journalist reporter1(REPORTER_1,IMAGE_REPORTER_1);
 

@@ -29,7 +29,7 @@ public:
   Continent ();
 
   Continent(std::string Nom, int xg, int yh, int xd, int yb);
-  Continent(std::string Nom, int xg, int yh, int xd, int yb,std::vector<Country> countries);
+  Continent(std::string Nom, int xg, int yh, int xd, int yb,std::vector<Country>& countries);
 
   /**
    * Empty Destructor

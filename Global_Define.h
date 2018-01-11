@@ -58,19 +58,26 @@
 #define MUSIC_MAIN "sounds/TheChain.ogg"
 
 #define FONT_FILE "data/Belgrano-Regular.ttf"
+#define MULTINATIONALS "data/MultiNational.txt"
+
 #define PHRASE_EXPLORE "Vous devez trouver le pays ou se situe le siege social de"
-#define PHRASE_EXPLORE2 "Pour cela choisissez d'abord un continent puis vous\npourrez proposer un pays."
+#define PHRASE_EXPLORE2 "Pour cela choisissez d'abord un continent puis vous pourrez\nproposer un pays."
 
 #include "Continent.h"
+#include "Multinational.h"
+
 //
 //extern sf::Font font;
 //extern sf::Music music;
-extern short int MAX_DIALOG_PHRASE_LENGTH;
+extern std::string::size_type MAX_DIALOG_PHRASE_LENGTH;
 extern short int MAX_PHRASES;
 extern std::ostream& operator<<(std::ostream & out, Country p);
 extern std::vector<Country> get_Europe();
 extern std::vector<Continent> read_Continents();
 extern std::string get_country(int X,int Y,Continent continent);
 extern std::string get_continent(int X,int Y,std::vector<Continent> world);
+extern std::string fit_string_in_dialog_box(std::string& str);
+extern Multinational create_Multinational(std::string Name);
+extern std::vector<Multinational> get_Multinationals();
 extern sf::Sprite getSprite(sf::Texture& texture2,Display p);
 #endif // GLOBAL_DEFINE_H_INCLUDED

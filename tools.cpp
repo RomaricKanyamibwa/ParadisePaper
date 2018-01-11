@@ -97,6 +97,64 @@ std::string get_country(int X,int Y,Continent continent)
     return country;
 }
 
+std::vector<Multinational> get_Multinationals()
+{
+    std::vector<Multinational> companies;
+    std::string line;
+    std::ifstream myfile (MULTINATIONALS);
+        if (myfile.is_open())
+    {
+        while ( getline (myfile,line) )
+        {
+            //replace(line.begin(), line.end(), ',', ' ');
+            std::cout<<"Multinational:"<<line<<std::endl;
+            if(!line.empty())
+            {
+                Multinational comp=create_Multinational(line);
+                companies.push_back(comp);
+            }
+        }
+    std::cout<<"Multinationals Loaded sucessfully"<<std::endl;
+    myfile.close();
+    }
+    else std::cerr << "Unable to open file "<<MULTINATIONALS<<std::endl;
+
+
+    return companies;
+}
+
+Multinational create_Multinational(std::string Name)
+{
+    Multinational m;
+    std::string line;
+    std::ifstream myfile ("data/"+Name+".txt");
+        if (myfile.is_open())
+    {
+        std::string image;
+        std::string descr;
+        Country siege;
+        std::vector<Country> societes_ecran;
+        if(getline (myfile,line))
+            image=line;
+        else std::cerr << "Unable to get "<<Name<<"'s image."<<std::endl;
+
+        if(getline (myfile,line))
+            descr=line;
+        else std::cerr << "Unable to get "<<Name<<"'s description."<<std::endl;
+        if(getline (myfile,line))
+            siege=Country(line,0,0,0,0);
+        else std::cerr << "Unable to get "<<Name<<"'s siege."<<std::endl;
+        while ( getline (myfile,line) )
+        {
+            societes_ecran.push_back(Country(line,0,0,0,0));
+        }
+        std::cout<<Name<<" was successfully created."<<std::endl;
+        m=Multinational(image,Name,siege,descr);
+        m.m_societes_ecranVector=societes_ecran;
+    }
+    else std::cerr << "Unable to open file \"data/"<<Name<<".txt\""<<std::endl;
+    return m;
+}
 
 std::string get_continent(int X,int Y,std::vector<Continent> continents)
 {
@@ -128,6 +186,25 @@ sf::Sprite getSprite(sf::Texture& texture2,Display p)
         sprite.setTexture(texture2);
     }
     return sprite;
+}
+
+std::string fit_string_in_dialog_box(std::string& str)
+{
+    std::string::size_type str_size=str.size();
+    if(str_size<=MAX_DIALOG_PHRASE_LENGTH)
+        return str;
+    else
+    {
+        std::string tmpstr =str.substr(MAX_DIALOG_PHRASE_LENGTH,str_size-MAX_DIALOG_PHRASE_LENGTH);
+        str=str.substr(0,MAX_DIALOG_PHRASE_LENGTH);
+        //std::cout<<"TMP"<<tmpstr<<std::endl;
+        std::string::size_type last=str.find_last_of(" ");
+        str=str.replace(last,1,"\n");
+        fit_string_in_dialog_box(tmpstr);
+        str=str+tmpstr;
+    }
+    //std::cout<<"Fitted word:"<<str<<std::endl;
+    return str;
 }
 
 int Game(sf::RenderWindow& window)
@@ -211,7 +288,11 @@ int Game(sf::RenderWindow& window)
 
 int main(int argc,char* argv[])
 {
+    std::string str=PHRASE_EXPLORE2;
+    fit_string_in_dialog_box(str);
+    std::cout<<str<<"\nsize=>"<<str.size()<<std::endl;
 	Game::Start();
+
 
 	return 0;
 }
