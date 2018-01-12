@@ -56,6 +56,7 @@ MainMenu::MenuResult MainMenu::ShowCreate(sf::RenderWindow& window)
 {
 
 	//Load menu image from file
+	window.clear();
 	window.create(sf::VideoMode(768,668),"Paradise Papers"/*,sf::Style::Fullscreen*/);
 	_menuItems.clear();
 	sf::Texture image;
@@ -144,6 +145,11 @@ MainMenu::MenuResult MainMenu::HandleClick(int x, int y)
                     std::cout<<"MALE"<<std::endl;
                 if((*it).action==Female)
                     std::cout<<"FEMALE"<<std::endl;
+                if((*it).action==Exit)
+                {
+                    std::cout<<"EXIT"<<std::endl;
+                    return (*it).action;
+                }
 				return (*it).action;
 			}
 	}

@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include "Journalist.h"
+#include "Continent.h"
 #include "Country.h"
 
 
@@ -27,7 +28,7 @@ public:
    * Empty Constructor
    */
   GameInformation ();
-  GameInformation (Journalist player,Place place):Player(player),Current_Place(place){};
+  GameInformation (Journalist player,Continent place):Player(player),Current_Continent(place){};
 
   /**
    * Empty Destructor
@@ -84,7 +85,8 @@ private:
 
   float Score;
   Journalist Player;
-  Place Current_Place;
+  Continent Current_Continent;
+  Country Current_Country;
   unsigned int Visited_Countries;
   unsigned int Completed_Missions;
   unsigned int Total_missions;
@@ -121,20 +123,38 @@ public:
   }
 
   /**
-   * Set the value of Current_Place
-   * @param new_var the new value of Current_Place
+   * Set the value of Current_Continent
+   * @param new_var the new value of Current_Continent
    */
-  void setCurrent_Place (Place new_var)   {
-      Current_Place = new_var;
+  void setCurrent_Continent (Continent new_var)   {
+      Current_Continent = new_var;
   }
 
   /**
-   * Get the value of Current_Place
-   * @return the value of Current_Place
+   * Get the value of Current_Continent
+   * @return the value of Current_Continent
    */
-  Place getCurrent_Place ()   {
-    return Current_Place;
+  Continent getCurrent_Continent ()   {
+    return Current_Continent;
   }
+
+
+  /**
+   * Set the value of Current_Country
+   * @param new_var the new value of Current_Country
+   */
+  void setCurrent_Country (Country new_var)   {
+      Current_Country = new_var;
+  }
+
+  /**
+   * Get the value of Current_Country
+   * @return the value of Current_Country
+   */
+  Country getCurrent_Country ()   {
+    return Current_Country;
+  }
+
 
   /**
    * Set the value of Player

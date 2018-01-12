@@ -67,10 +67,19 @@ std::vector<Continent> read_Continents()
             ss<<line;
             ss>>Nom>>xg>>yh>>xd>>yb;
             std::cout<<"Continent:"<<Nom<<std::endl;
+            std::replace( Nom.begin(), Nom.end(), '_', ' ');
             if(!Nom.empty())
             {
-                Continent continent(Nom,xg,yh,xd,yb);
-                Continents.push_back(continent);
+                if(Nom=="Europe")
+                {
+                    Continent continent(Nom,xg,yh,xd,yb,europe);
+                    Continents.push_back(continent);
+                }
+                else
+                {
+                    Continent continent(Nom,xg,yh,xd,yb);
+                    Continents.push_back(continent);
+                }
             }
         }
     std::cout<<"Continents Loaded sucessfully"<<std::endl;
@@ -80,15 +89,15 @@ std::vector<Continent> read_Continents()
     return Continents;
 }
 
-std::string get_country(int X,int Y,Continent continent)
+Country get_country(int X,int Y,Continent continent)
 {
-    std::string country="";
+    Country country;
     std::vector<int> Pos;
     for(auto & value: continent.getCountries()) {
         if(X>=value.getPosition()[0] && X<=value.getPosition()[2]
            && Y>=value.getPosition()[1] && Y<=value.getPosition()[3])
         {
-            country=value.getName();
+            country=value;
             break;
         }
 
@@ -156,22 +165,22 @@ Multinational create_Multinational(std::string Name)
     return m;
 }
 
-std::string get_continent(int X,int Y,std::vector<Continent> continents)
+Continent get_continent(int X,int Y,std::vector<Continent> continents)
 {
-    std::string country="";
+    Continent cont;
     std::vector<int> Pos;
     for(auto & value: continents) {
         if(X>=value.getPosition()[0] && X<=value.getPosition()[2]
            && Y>=value.getPosition()[1] && Y<=value.getPosition()[3])
         {
-            country=value.getName();
-            std::replace( country.begin(), country.end(), '_', ' ');
+            cont=value;
+            //std::replace( country.begin(), country.end(), '_', ' ');
             break;
         }
 
 
     }
-    return country;
+    return cont;
 }
 
 sf::Sprite getSprite(sf::Texture& texture2,Display p)
@@ -260,7 +269,7 @@ int Game(sf::RenderWindow& window)
                 sf::Vector2i localPosition = sf::Mouse::getPosition(window);
                 std::cout <<"X:"<< localPosition.x <<" Y:"<< localPosition.y <<std::endl;
                 sf::Vector2u size = window.getSize();
-                std::cout<<"Country:"<<get_country(localPosition.x ,localPosition.y,Europe)<<std::endl;
+                std::cout<<"Country:"<<get_country(localPosition.x ,localPosition.y,Europe).getName()<<std::endl;
                 unsigned int width = size.x;
                 unsigned int height = size.y;
                 std::cout <<"w:"<< width <<" h:"<< height <<std::endl;
@@ -291,8 +300,7 @@ int main(int argc,char* argv[])
     //fit_string_in_dialog_box(str);
     //std::cout<<str<<"\nsize=>"<<str.size()<<std::endl;
 	Game::Start();
-
-
+	Game::music.stop();
 	return 0;
 }
 

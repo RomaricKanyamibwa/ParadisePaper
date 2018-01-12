@@ -20,7 +20,7 @@ short int MAX_PHRASES=4;
 std::string continent=WORLD;
 std::string::size_type MAX_DIALOG_PHRASE_LENGTH=std::string("Please choose a Continent AAAAAAAAAAAAAAAAAAAAAAAAAAA.").size();
 GameInformation DataPlayer;
-Place World("World",0,0,0,0,IMAGE_WORLD);
+Continent World("World",0,0,0,0,IMAGE_WORLD);
 std::vector<Country> europe=get_Europe();
 std::vector<Continent> continents=read_Continents();
 std::vector<Multinational> companies=get_Multinationals();
@@ -29,6 +29,8 @@ Journalist reporter1(REPORTER_1,IMAGE_REPORTER_1);
 std::string Dialog=PHRASE_EXPLORE;
 /*static*/ sf::Texture Multinational_texture;
 /*static*/ sf::Sprite Multinational_sprite;
+sf::Texture Current_Place;
+sf::Sprite Current_Place_spr;
 
 
 sf::Sprite reporter_sprite;
@@ -71,24 +73,26 @@ Game::~Game () { }
 // Other methods
 //
 
+
 void Game::Start(void)
 {
     Game::initAttributes();
+    Game::config_continent_images();
     playing=0;
 	if(_gameState != Uninitialized)
 		return;
-	_mainWindow.create(sf::VideoMode(1024,768,32),"Paradise Papers");
+    _mainWindow.clear();
+	_mainWindow.create(sf::VideoMode(1024,667,32),"Paradise Papers");
 
 	_gameState= Game::ShowingStart;
 
 	while(!IsExiting())
 	{
 	    if(playing)
-            GameLoop(DataPlayer.getCurrent_Place(),DataPlayer.getCurrent_Place().getPerson());
+            GameLoop(DataPlayer.getCurrent_Continent(),DataPlayer.getCurrent_Continent().getPerson());
         else
-            GameLoop(World,reporter1);
+            GameLoop(DataPlayer.getCurrent_Continent(),reporter1);
 	}
-
 	_mainWindow.close();
 }
 
@@ -233,7 +237,8 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
         {
             sf::Vector2i localPosition = sf::Mouse::getPosition(_mainWindow);
             std::cout <<"X:"<< localPosition.x <<" Y:"<< localPosition.y <<std::endl;
-            std::cout<<"Continent:"<<get_continent(localPosition.x,localPosition.y,continents)<<std::endl;
+            std::cout<<"Continent:"<<get_continent(localPosition.x,localPosition.y,continents).getName()<<std::endl;
+            load_continent(get_continent(localPosition.x,localPosition.y,continents));
             sf::Vector2u size = _mainWindow.getSize();
             //std::cout<<"Country:"<<get_country(localPosition.x ,localPosition.y,Europe)<<std::endl;
             unsigned int width = size.x;
@@ -348,6 +353,7 @@ Journalist Game::CreatePerson()
 void Game::initAttributes () {
     Europe.setImage(IMAGE_EUROPE);
     Game::text.setFont(font);
+    DataPlayer.setCurrent_Continent(World);
     if (!Game::font.loadFromFile(FONT_FILE))
     {
         std::cerr<<"FAILED TO LOAD FONT"<<std::endl;
@@ -374,4 +380,34 @@ void load_multinational()
 {
     Multinational_sprite=getSprite(Multinational_texture,companies[0]);
     Multinational_sprite.setPosition(sf::Vector2f(0,0));
+    Multinational_sprite.scale(0.75,0.75);
+}
+
+
+void Game::load_continent(Continent continent)
+{
+    if(continent.getName()==Europe.getName())
+    {
+        if(continent.getName()==DataPlayer.getCurrent_Continent().getName())
+            return;
+        continent=Europe;
+        DataPlayer.setCurrent_Continent(Europe);
+        _mainWindow.setSize(sf::Vector2u(EUROPE_WIDTH,EUROPE_HEIGHT));
+        Current_Place_spr=getSprite(Current_Place,Europe);
+        _mainWindow.clear();
+        _mainWindow.draw(Current_Place_spr);
+        _mainWindow.display();
+        std::cout<<"Changing Continent:"<<Europe.getName()<<std::endl;
+    }
+    std::cout<<"NOT Changing Continent:"<<continent.getName()<<std::endl;
+
+}
+
+void Game::config_continent_images()
+{
+    Europe.setWidth_image(EUROPE_WIDTH);
+    Europe.setHeight_image(EUROPE_HEIGHT);
+    Europe.setImage(IMAGE_EUROPE);
+    World.setWidth_image(WORLD_WIDTH);
+    World.setHeight_image(WORLD_HEIGHT);
 }

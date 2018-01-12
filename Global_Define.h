@@ -13,7 +13,7 @@
 #define IMAGE_FEMALE "images/Female.png"
 #define IMAGE_FEMALE_Name "images/Rania.png"
 #define IMAGE_FEMALE_WORLD "images/Rania_Continents-of-the-World.png"
-#define IMAGE_EUROPE "images/Europe.png"
+#define IMAGE_EUROPE "images/europe.png"
 #define IMAGE_WORLD "images/Continents-of-the-World.jpg"
 #define IMAGE_DIALOG "images/Dialog.png"
 #define DIALOG_WIDTH 260
@@ -35,9 +35,9 @@
 #define WORLD_WIDTH 1362.0
 #define EUROPE_WIDTH 2200.0
 #define WORLD_HEIGHT 629.0
-#define EUROPE_HEIGHT 1790.0
+#define EUROPE_HEIGHT 1760.0
 #define EUROPE "Europe"
-#define EUROPE_FILE "data/europe.txt"
+#define EUROPE_FILE "data/Europe.txt"
 #define WORLD "WORLD"
 #define WORLD_FILE "data/continents.txt"
 #define ASIA "Asia"
@@ -70,11 +70,12 @@
 //extern sf::Music music;
 extern std::string::size_type MAX_DIALOG_PHRASE_LENGTH;
 extern short int MAX_PHRASES;
+extern std::vector<Country> europe;
 extern std::ostream& operator<<(std::ostream & out, Country p);
 extern std::vector<Country> get_Europe();
 extern std::vector<Continent> read_Continents();
-extern std::string get_country(int X,int Y,Continent continent);
-extern std::string get_continent(int X,int Y,std::vector<Continent> world);
+extern Country get_country(int X,int Y,Continent continent);
+extern Continent get_continent(int X,int Y,std::vector<Continent> world);
 extern std::string fit_string_in_dialog_box(std::string& str);
 extern Multinational create_Multinational(std::string Name);
 extern std::vector<Multinational> get_Multinationals();

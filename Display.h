@@ -22,6 +22,7 @@ public:
    */
   Display ();
   Display (std::string Image):Image(Image){};
+  Display (std::string Image,int image_w,int image_h):Image(Image),width_image(image_w),height_image(image_h){};
 
   /**
    * Empty Destructor
@@ -77,6 +78,8 @@ private:
   //
 
   std::string Image;
+  int width_image;
+  int height_image;
 public:
 
 
@@ -106,6 +109,38 @@ public:
    */
   std::string getImage ()   {
     return Image;
+  }
+
+  /**
+   * Set the value of width_image
+   * @param new_var the new value of width_image
+   */
+  void setWidth_image (int new_var)   {
+      width_image = new_var;
+  }
+
+  /**
+   * Get the value of width_image
+   * @return the value of width_image
+   */
+  int getWidth_image ()   {
+    return width_image;
+  }
+
+  /**
+   * Set the value of heigh_image
+   * @param new_var the new value of heigh_image
+   */
+  void setHeight_image (int new_var)   {
+      height_image = new_var;
+  }
+
+  /**
+   * Get the value of heigh_image
+   * @return the value of heigh_image
+   */
+  int getHeight_image ()   {
+    return height_image;
   }
 private:
 

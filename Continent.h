@@ -30,7 +30,8 @@ public:
 
   Continent(std::string Nom, int xg, int yh, int xd, int yb);
   Continent(std::string Nom, int xg, int yh, int xd, int yb,std::vector<Country>& countries);
-
+  //Continent::Continent(std::string Nom,std::string image, int xg, int yh, int xd, int yb,std::vector<Country>& countries,int image_w,int image_h);
+  Continent(std::string Nom, int xg, int yh, int xd, int yb,std::string image):Place(Nom,xg,yh,xd,yb,image){};
   /**
    * Empty Destructor
    */
