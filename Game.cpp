@@ -23,6 +23,7 @@ GameInformation DataPlayer;
 Continent World(WORLD,0,0,0,0,IMAGE_WORLD);
 std::vector<Country> europe=get_Europe();
 Continent Europe("Europe",0,0,0,0,europe);
+Continent North_America(NORTH_AMERICA,0,0,0,0);
 
 std::vector<Continent> continents=read_Continents();
 std::vector<Multinational> companies=get_Multinationals();
@@ -451,12 +452,18 @@ void change_reporter(std::string continent_name)
     {
         reporter1=Journalist(REPORTER_2,IMAGE_REPORTER_Europe,REPORTER_Europe_WIDTH,REPORTER_Europe_HEIGTH);
     }
+
+    if(continent_name==NORTH_AMERICA)
+    {
+        reporter1=Journalist(REPORTER_3,IMAGE_REPORTER_NAMERICA,REPORTER_NAMERICA_WIDTH,REPORTER_NAMERICA_HEIGTH);
+    }
 }
 
 void Game::load_continent(Continent cont)
 {
     if(cont.getName()==Europe.getName()
-       ||cont.getName()==WORLD)
+       ||cont.getName()==WORLD
+       ||cont.getName()==NORTH_AMERICA)
     {
         if(cont.getName()==DataPlayer.getCurrent_Continent().getName())
             return;
@@ -470,20 +477,6 @@ void Game::load_continent(Continent cont)
         Game_HEIGHT=cont.getHeight_image();
         Game_WIDTH=cont.getWidth_image();
     }
-//    if(cont.getName()==WORLD)
-//    {
-//        if(cont.getName()==DataPlayer.getCurrent_Continent().getName())
-//            return;
-//        change_reporter(WORLD);
-//        continent=WORLD;
-//        DataPlayer.setCurrent_Continent(World);
-//        _mainWindow.clear();
-//        _mainWindow.create(sf::VideoMode(World_WIDTH,WORLD_HEIGHT,32),"Paradise Papers");
-//        std::cout<<"Changing Continent:"<<World.getName()<<std::endl;
-//        DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()-10);
-//        Game_HEIGHT=WORLD_HEIGHT;
-//        Game_WIDTH=WORLD_WIDTH;
-//    }
     std::cout<<"NOT Changing Continent:"<<cont.getName()<<std::endl;
 
 }
@@ -494,6 +487,11 @@ void Game::config_continent_images()
     Europe.setWidth_image(EUROPE_WIDTH);
     Europe.setHeight_image(EUROPE_HEIGHT);
     Europe.setImage(IMAGE_EUROPE);
+
+    North_America.setWidth_image(NORTH_AMERICA_WIDTH);
+    North_America.setHeight_image(NORTH_AMERICA_HEIGHT);
+    North_America.setImage(IMAGE_NORTH_AMERICA);
+
     World.setWidth_image(WORLD_WIDTH);
     World.setHeight_image(WORLD_HEIGHT);
 }

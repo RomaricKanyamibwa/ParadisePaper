@@ -14,6 +14,7 @@
 #define IMAGE_FEMALE_Name "images/Rania.png"
 #define IMAGE_FEMALE_WORLD "images/Rania_Continents-of-the-World.png"
 #define IMAGE_EUROPE "images/Europe2.png"
+#define IMAGE_NORTH_AMERICA "images/North_America.jpg"
 #define IMAGE_WORLD "images/Continents-of-the-World.jpg"
 #define IMAGE_DIALOG "images/Dialog.png"
 #define DIALOG_WIDTH 260
@@ -37,8 +38,10 @@
 #define GO_BACK_HEIGHT 69
 #define WORLD_WIDTH 1362.0
 #define EUROPE_WIDTH 900.0
+#define NORTH_AMERICA_WIDTH 1047.0
 #define WORLD_HEIGHT 629.0
 #define EUROPE_HEIGHT 720.0
+#define NORTH_AMERICA_HEIGHT 720.0
 #define EUROPE "Europe"
 #define EUROPE_FILE "data/Europe.txt"
 #define WORLD "WORLD"
@@ -48,7 +51,7 @@
 #define OCEANIA "Oceania"
 #define AFRICA "Africa"
 #define SOUTH_AMERICA "South America"
-#define NORTH_AMERICA "North America"
+#define NORTH_AMERICA "Amerique du Nord"
 #define AMERICA "America"
 #define REPORTER_1 "Nadia et Pete"
 #define REPORTER_1_WIDTH 198.0
@@ -56,8 +59,11 @@
 #define IMAGE_REPORTER_1 "images/Reporter.png"
 #define REPORTER_Europe_WIDTH 187.0
 #define REPORTER_Europe_HEIGTH 394.0
+#define REPORTER_NAMERICA_WIDTH 146.0
+#define REPORTER_NAMERICA_HEIGTH 351.0
 #define IMAGE_REPORTER_Europe "images/Reporter2.png"
-#define REPORTER_2 "David"
+#define IMAGE_REPORTER_NAMERICA "images/Reporter3.png"
+#define REPORTER_2 "Leon"
 #define REPORTER_3 "Colette"
 #define REPORTER_4 "James"
 
@@ -87,5 +93,6 @@ extern Multinational create_Multinational(std::string Name);
 extern std::vector<Multinational> get_Multinationals();
 extern sf::Sprite getSprite(sf::Texture& texture2,Display p);
 extern Continent Europe;
+extern Continent North_America;
 extern void load_multinational();
 #endif // GLOBAL_DEFINE_H_INCLUDED
