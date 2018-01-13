@@ -20,12 +20,13 @@ short int MAX_PHRASES=4;
 std::string continent=WORLD;
 std::string::size_type MAX_DIALOG_PHRASE_LENGTH=std::string("Please choose a Continent AAAAAAAAAAAAAAAAAAAAAAAAAAA.").size();
 GameInformation DataPlayer;
-Continent World("World",0,0,0,0,IMAGE_WORLD);
+Continent World(WORLD,0,0,0,0,IMAGE_WORLD);
 std::vector<Country> europe=get_Europe();
+Continent Europe("Europe",0,0,0,0,europe);
+
 std::vector<Continent> continents=read_Continents();
 std::vector<Multinational> companies=get_Multinationals();
-Continent Europe("Europe",0,0,0,0,europe);
-Journalist reporter1(REPORTER_1,IMAGE_REPORTER_1);
+Journalist reporter1(REPORTER_1,IMAGE_REPORTER_1,REPORTER_1_WIDTH,REPORTER_1_HEIGTH);
 std::string Dialog=PHRASE_EXPLORE;
 /*static*/ sf::Texture Multinational_texture;
 /*static*/ sf::Sprite Multinational_sprite;
@@ -33,6 +34,7 @@ sf::Texture Current_Place;
 sf::Sprite Current_Place_spr;
 sf::Texture Go_Back;
 sf::Sprite Go_Back_spr;
+float Go_Back_spr_scale;
 
 
 sf::Sprite reporter_sprite;
@@ -124,7 +126,7 @@ void Game::Playing_func(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
         text.setColor(sf::Color::Black);
         text.setPosition(sf::Vector2f(Game_WIDTH-(MONEY_WIDTH*money_scale+text.getCharacterSize()/2.0*money_string.size()),MONEY_HEIGHT*money_scale/2.2));
 
-        player_sprite.setPosition(sf::Vector2f(Game_WIDTH-MALE_WIDTH,Game_HEIGHT-REPORTER_1_HEIGTH));
+        player_sprite.setPosition(sf::Vector2f(Game_WIDTH-MALE_WIDTH,Game_HEIGHT-reporter1.getHeight_image()));
         money_sprite.setPosition(sf::Vector2f(Game_WIDTH-MONEY_WIDTH*money_scale,0));
         missions_sprite.setPosition(sf::Vector2f(Game_WIDTH-MISSIONS_WIDTH*mission_width_scale-10,MONEY_HEIGHT*money_scale+1));
 
@@ -231,6 +233,18 @@ void Game::MouseAction()
     else
     {
         std::cout<<"Continent:"<<get_country(localPosition.x,localPosition.y,Europe).getName()<<std::endl;
+        std::cout<<"GOOO BACK:"<<Go_Back_spr.getPosition().x<<","<<Go_Back_spr.getPosition().y<<std::endl;
+        std::cout<<"GOOO BACK2:"<<Go_Back_spr.getPosition().x+GO_BACK_WIDTH*0.5<<","<<Go_Back_spr.getPosition().y+GO_BACK_HEIGHT*0.5<<std::endl;
+        std::cout<<"MOUSE:"<<sf::Mouse::getPosition(_mainWindow).x<<","<<sf::Mouse::getPosition(_mainWindow).y<<std::endl;
+        if(sf::Mouse::getPosition(_mainWindow).x>=Go_Back_spr.getPosition().x
+           && sf::Mouse::getPosition(_mainWindow).x<=Go_Back_spr.getPosition().x+GO_BACK_WIDTH*0.5
+           && sf::Mouse::getPosition(_mainWindow).y>=Go_Back_spr.getPosition().y
+           && sf::Mouse::getPosition(_mainWindow).y<=Go_Back_spr.getPosition().y+GO_BACK_HEIGHT*0.5)
+        {
+            std::cout<<"GOOO BACK!!!!!!!!!!!"<<std::endl;
+            load_continent(World);
+        }
+
     }
     sf::Vector2u size = _mainWindow.getSize();
     //std::cout<<"Country:"<<get_country(localPosition.x ,localPosition.y,Europe)<<std::endl;
@@ -260,7 +274,7 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
         {
             MouseAction();
         }
-        reporter_sprite.setPosition(sf::Vector2f(0,Game_HEIGHT-REPORTER_1_HEIGTH));
+        reporter_sprite.setPosition(sf::Vector2f(0,Game_HEIGHT-reporter1.getHeight_image()));
 
         _mainWindow.draw(imageSprite);
         _mainWindow.draw(reporter_sprite);
@@ -269,7 +283,7 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
         Playing_func(player_sprite,money_sprite,missions_sprite);
         if(continent==WORLD)
         {
-            dialog_sprite.setPosition(sf::Vector2f(REPORTER_1_WIDTH,Game_HEIGHT-DIALOG3_HEIGHT));
+            dialog_sprite.setPosition(sf::Vector2f(reporter1.getWidth_image(),Game_HEIGHT-DIALOG3_HEIGHT));
             _mainWindow.draw(dialog_sprite);
             WriteDialogBox(Dialog);
         }
@@ -378,7 +392,6 @@ Journalist Game::CreatePerson()
 
 
 void Game::initAttributes () {
-    Europe.setImage(IMAGE_EUROPE);
     Game::text.setFont(font);
     DataPlayer.setCurrent_Continent(World);
     if (!Game::font.loadFromFile(FONT_FILE))
@@ -408,36 +421,69 @@ void load_multinational()
     Multinational_sprite=getSprite(Multinational_texture,companies[0]);
     Multinational_sprite.setPosition(sf::Vector2f(0,15));
     if(companies[0].getHeight_image()>250 || companies[0].getWidth_image()>250)
-        Multinational_sprite.scale(0.4,0.4);
+        Multinational_sprite.scale(0.25,0.25);
+        //(150/((float)companies[0].getWidth_image()),100/((float)companies[0].getHeight_image()));
     else
-        Multinational_sprite.scale(0.65,0.65);
+        Multinational_sprite.scale(0.4,0.4);
 }
 
 void Game::disp_go_back()
 {
     Go_Back_spr=getSprite(Go_Back,Display(GO_BACK,GO_BACK_WIDTH,GO_BACK_HEIGHT));
+    Go_Back_spr.scale(0.5,0.5);
     if(companies[0].getHeight_image()>250 || companies[0].getWidth_image()>250)
-        Go_Back_spr.setPosition(sf::Vector2f(0,0.4*companies[0].getHeight_image()+25));
+        Go_Back_spr_scale=0.25;
     else
-        Go_Back_spr.setPosition(sf::Vector2f(0,0.65*companies[0].getHeight_image()));
+        Go_Back_spr_scale=0.4;
+    Go_Back_spr.setPosition(sf::Vector2f(0,Go_Back_spr_scale*companies[0].getHeight_image()+25));
     _mainWindow.draw(Go_Back_spr);
 }
+
+
+void change_reporter(std::string continent_name)
+{
+    if(continent_name==WORLD)
+    {
+        reporter1=Journalist(REPORTER_1,IMAGE_REPORTER_1,REPORTER_1_WIDTH,REPORTER_1_HEIGTH);
+    }
+
+    if(continent_name==EUROPE)
+    {
+        reporter1=Journalist(REPORTER_2,IMAGE_REPORTER_Europe,REPORTER_Europe_WIDTH,REPORTER_Europe_HEIGTH);
+    }
+}
+
 void Game::load_continent(Continent cont)
 {
-    if(cont.getName()==Europe.getName())
+    if(cont.getName()==Europe.getName()
+       ||cont.getName()==WORLD)
     {
         if(cont.getName()==DataPlayer.getCurrent_Continent().getName())
             return;
-        cont=Europe;
-        continent="Europe";
-        DataPlayer.setCurrent_Continent(Europe);
+        change_reporter(cont.getName());
+        continent=cont.getName();
+        DataPlayer.setCurrent_Continent(cont);
         _mainWindow.clear();
-        _mainWindow.create(sf::VideoMode(EUROPE_WIDTH,EUROPE_HEIGHT,32),"Paradise Papers");
-        std::cout<<"Changing Continent:"<<Europe.getName()<<std::endl;
+        _mainWindow.create(sf::VideoMode(cont.getWidth_image(),cont.getHeight_image(),32),"Paradise Papers");
+        std::cout<<"Changing Continent:"<<cont.getName()<<std::endl;
         DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()-10);
-        Game_HEIGHT=EUROPE_HEIGHT;
-        Game_WIDTH=EUROPE_WIDTH;
+        Game_HEIGHT=cont.getHeight_image();
+        Game_WIDTH=cont.getWidth_image();
     }
+//    if(cont.getName()==WORLD)
+//    {
+//        if(cont.getName()==DataPlayer.getCurrent_Continent().getName())
+//            return;
+//        change_reporter(WORLD);
+//        continent=WORLD;
+//        DataPlayer.setCurrent_Continent(World);
+//        _mainWindow.clear();
+//        _mainWindow.create(sf::VideoMode(World_WIDTH,WORLD_HEIGHT,32),"Paradise Papers");
+//        std::cout<<"Changing Continent:"<<World.getName()<<std::endl;
+//        DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()-10);
+//        Game_HEIGHT=WORLD_HEIGHT;
+//        Game_WIDTH=WORLD_WIDTH;
+//    }
     std::cout<<"NOT Changing Continent:"<<cont.getName()<<std::endl;
 
 }

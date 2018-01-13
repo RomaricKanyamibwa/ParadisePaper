@@ -176,6 +176,7 @@ public:
 //  std::string getImage ()   {
 //    return Image;
 //  }
+// virtual std::string greetings()=0;
 private:
 
 

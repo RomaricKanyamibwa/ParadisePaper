@@ -54,7 +54,10 @@
 #define REPORTER_1_WIDTH 198.0
 #define REPORTER_1_HEIGTH 384.0
 #define IMAGE_REPORTER_1 "images/Reporter.png"
-#define REPORTER_2 "Dacid"
+#define REPORTER_Europe_WIDTH 187.0
+#define REPORTER_Europe_HEIGTH 394.0
+#define IMAGE_REPORTER_Europe "images/Reporter2.png"
+#define REPORTER_2 "David"
 #define REPORTER_3 "Colette"
 #define REPORTER_4 "James"
 
@@ -83,5 +86,6 @@ extern std::string fit_string_in_dialog_box(std::string& str);
 extern Multinational create_Multinational(std::string Name);
 extern std::vector<Multinational> get_Multinationals();
 extern sf::Sprite getSprite(sf::Texture& texture2,Display p);
+extern Continent Europe;
 extern void load_multinational();
 #endif // GLOBAL_DEFINE_H_INCLUDED

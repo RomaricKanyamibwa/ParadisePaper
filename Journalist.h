@@ -23,6 +23,11 @@ public:
    */
   Journalist ();
   Journalist (std::string Name,std::string Image):NonFraudster(Name,Image){};
+  Journalist (std::string Name,std::string Image,int width,int height):NonFraudster(Name,Image)
+  {
+      this->setHeight_image(height);
+      this->setWidth_image(width);
+  };
 
   /**
    * Empty Destructor

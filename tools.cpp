@@ -189,6 +189,8 @@ Continent get_continent(int X,int Y,std::vector<Continent> continents)
 
 
     }
+    if(cont.getName()==EUROPE)
+        return Europe;
     return cont;
 }
 
@@ -301,6 +303,8 @@ int Game(sf::RenderWindow& window)
 
   return EXIT_SUCCESS;
 }
+
+
 
 
 int main(int argc,char* argv[])
