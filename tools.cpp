@@ -142,9 +142,16 @@ Multinational create_Multinational(std::string Name)
         std::string image;
         std::string descr;
         Country siege;
+        int height,width;
         std::vector<Country> societes_ecran;
         if(getline (myfile,line))
-            image="images/logo multinationales/"+line;
+        {
+            std::stringstream ss;
+            replace(line.begin(), line.end(), ',', ' ');
+            ss<<line;
+            ss>>image>>width>>height;
+            image="images/logo multinationales/"+image;
+        }
         else std::cerr << "Unable to get "<<Name<<"'s image."<<std::endl;
 
         if(getline (myfile,line))
@@ -159,6 +166,8 @@ Multinational create_Multinational(std::string Name)
         }
         std::cout<<Name<<" was successfully created."<<std::endl;
         m=Multinational(image,Name,siege,descr);
+        m.setWidth_image(width);
+        m.setHeight_image(height);
         m.m_societes_ecranVector=societes_ecran;
     }
     else std::cerr << "Unable to open file \"data/"<<Name<<".txt\""<<std::endl;

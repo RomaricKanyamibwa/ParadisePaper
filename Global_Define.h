@@ -13,7 +13,7 @@
 #define IMAGE_FEMALE "images/Female.png"
 #define IMAGE_FEMALE_Name "images/Rania.png"
 #define IMAGE_FEMALE_WORLD "images/Rania_Continents-of-the-World.png"
-#define IMAGE_EUROPE "images/europe.png"
+#define IMAGE_EUROPE "images/Europe2.png"
 #define IMAGE_WORLD "images/Continents-of-the-World.jpg"
 #define IMAGE_DIALOG "images/Dialog.png"
 #define DIALOG_WIDTH 260
@@ -32,10 +32,13 @@
 #define MISSIONS_HEIGHT 134
 #define START_SCREEN "images/StartScreen.jpg"
 #define PLAYER_SCREEN "images/PlayerScreen.png"
+#define GO_BACK "images/goback.jpg"
+#define GO_BACK_WIDTH 150
+#define GO_BACK_HEIGHT 69
 #define WORLD_WIDTH 1362.0
-#define EUROPE_WIDTH 2200.0
+#define EUROPE_WIDTH 900.0
 #define WORLD_HEIGHT 629.0
-#define EUROPE_HEIGHT 1760.0
+#define EUROPE_HEIGHT 720.0
 #define EUROPE "Europe"
 #define EUROPE_FILE "data/Europe.txt"
 #define WORLD "WORLD"

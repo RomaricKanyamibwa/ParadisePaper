@@ -184,6 +184,8 @@ private:
   static void WriteDialogBox(std::string msg);
   static void config_continent_images();
   static void load_continent(Continent continent);
+  static void MouseAction();
+  static void disp_go_back();
 
 
 };

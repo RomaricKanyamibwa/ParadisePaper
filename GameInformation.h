@@ -85,6 +85,8 @@ private:
 
   float Score;
   Journalist Player;
+  //Journalist reporter;
+  //bool isSet_reporter;
   Continent Current_Continent;
   Country Current_Country;
   unsigned int Visited_Countries;
@@ -168,7 +170,7 @@ public:
    * Get the value of Player
    * @return the value of Player
    */
-  Journalist getPlayer ()   {
+  Journalist& getPlayer ()   {
     return Player;
   }
 
