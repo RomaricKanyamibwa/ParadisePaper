@@ -264,7 +264,8 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
 
         _mainWindow.draw(imageSprite);
         _mainWindow.draw(reporter_sprite);
-        disp_go_back();
+        if(continent!=WORLD)
+            disp_go_back();
         Playing_func(player_sprite,money_sprite,missions_sprite);
         if(continent==WORLD)
         {
