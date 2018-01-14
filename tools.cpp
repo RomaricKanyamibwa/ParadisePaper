@@ -191,6 +191,8 @@ Continent get_continent(int X,int Y,std::vector<Continent> continents)
         return Europe;
     if(cont.getName()==NORTH_AMERICA)
         return North_America;
+    if(cont.getName()==AFRICA)
+        return Africa;
     return cont;
 }
 

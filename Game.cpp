@@ -22,8 +22,9 @@ std::string::size_type MAX_DIALOG_PHRASE_LENGTH=std::string("Please choose a Con
 GameInformation DataPlayer;
 Continent World(WORLD,0,0,0,0,IMAGE_WORLD);
 std::vector<Country> europe=get_Europe();
-Continent Europe("Europe",0,0,0,0,europe);
+Continent Europe(EUROPE,0,0,0,0,europe);
 Continent North_America(NORTH_AMERICA,0,0,0,0);
+Continent Africa(AFRICA,0,0,0,0);
 
 std::vector<Continent> continents=read_Continents();
 std::vector<Multinational> companies=get_Multinationals();
@@ -457,12 +458,17 @@ void change_reporter(std::string continent_name)
     {
         reporter1=Journalist(REPORTER_3,IMAGE_REPORTER_NAMERICA,REPORTER_NAMERICA_WIDTH,REPORTER_NAMERICA_HEIGTH);
     }
+    if(continent_name==AFRICA)
+    {
+        reporter1=Journalist(REPORTER_4,IMAGE_REPORTER_AFRICA,REPORTER_AFRICA_WIDTH,REPORTER_AFRICA_HEIGTH);
+    }
 }
 
 void Game::load_continent(Continent cont)
 {
     if(cont.getName()==Europe.getName()
        ||cont.getName()==WORLD
+       ||cont.getName()==AFRICA
        ||cont.getName()==NORTH_AMERICA)
     {
         if(cont.getName()==DataPlayer.getCurrent_Continent().getName())
@@ -491,6 +497,10 @@ void Game::config_continent_images()
     North_America.setWidth_image(NORTH_AMERICA_WIDTH);
     North_America.setHeight_image(NORTH_AMERICA_HEIGHT);
     North_America.setImage(IMAGE_NORTH_AMERICA);
+
+    Africa.setWidth_image(AFRICA_WIDTH);
+    Africa.setHeight_image(AFRICA_HEIGHT);
+    Africa.setImage(IMAGE_AFRICA);
 
     World.setWidth_image(WORLD_WIDTH);
     World.setHeight_image(WORLD_HEIGHT);
