@@ -37,6 +37,9 @@ sf::Sprite Current_Place_spr;
 sf::Texture Go_Back;
 sf::Sprite Go_Back_spr;
 float Go_Back_spr_scale;
+sf::Texture Go_South;
+sf::Sprite Go_South_spr;
+float Go_Back_South_scale;
 
 
 sf::Sprite reporter_sprite;
@@ -245,6 +248,10 @@ void Game::MouseAction()
         {
             std::cout<<"GOOO BACK!!!!!!!!!!!"<<std::endl;
             load_continent(World);
+        }
+        if(continent==EUROPE||continent==WORLD)
+        {
+
         }
 
     }
@@ -466,7 +473,7 @@ void change_reporter(std::string continent_name)
 
 void Game::load_continent(Continent cont)
 {
-    if(cont.getName()==Europe.getName()
+    if(cont.getName()==EUROPE
        ||cont.getName()==WORLD
        ||cont.getName()==AFRICA
        ||cont.getName()==NORTH_AMERICA)
@@ -482,6 +489,7 @@ void Game::load_continent(Continent cont)
         DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()-10);
         Game_HEIGHT=cont.getHeight_image();
         Game_WIDTH=cont.getWidth_image();
+
     }
     std::cout<<"NOT Changing Continent:"<<cont.getName()<<std::endl;
 
@@ -504,4 +512,6 @@ void Game::config_continent_images()
 
     World.setWidth_image(WORLD_WIDTH);
     World.setHeight_image(WORLD_HEIGHT);
+
+    Go_South_spr=getSprite(Go_South,Display(IMAGE_GO_SOUTH));
 }

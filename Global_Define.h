@@ -15,6 +15,7 @@
 #define IMAGE_FEMALE_WORLD "images/Rania_Continents-of-the-World.png"
 #define IMAGE_EUROPE "images/Europe2.png"
 #define IMAGE_NORTH_AMERICA "images/North_America.jpg"
+#define IMAGE_CENTRAL_AMERICA "images/central-america-with-countries.png"
 #define IMAGE_AFRICA "images/Africa.jpg"
 #define IMAGE_WORLD "images/Continents-of-the-World.jpg"
 #define IMAGE_DIALOG "images/Dialog.png"
@@ -40,10 +41,12 @@
 #define WORLD_WIDTH 1362.0
 #define EUROPE_WIDTH 900.0
 #define NORTH_AMERICA_WIDTH 1047.0
+#define CENTRAL_AMERICA_WIDTH 1362.0
 #define AFRICA_WIDTH 1024.0
 #define WORLD_HEIGHT 629.0
 #define EUROPE_HEIGHT 720.0
 #define NORTH_AMERICA_HEIGHT 720.0
+#define CENTRAL_AMERICA_HEIGHT 603.0
 #define AFRICA_HEIGHT 768.0
 #define EUROPE "Europe"
 #define EUROPE_FILE "data/Europe.txt"
@@ -66,9 +69,12 @@
 #define REPORTER_NAMERICA_HEIGTH 351.0
 #define REPORTER_AFRICA_WIDTH 178.0
 #define REPORTER_AFRICA_HEIGTH 398.0
+#define GO_SOUTH_WIDTH 256
+#define GO_SOUTH_HEIGTH 256
 #define IMAGE_REPORTER_Europe "images/Reporter2.png"
 #define IMAGE_REPORTER_NAMERICA "images/Reporter3.png"
 #define IMAGE_REPORTER_AFRICA "images/Reporter4.png"
+#define IMAGE_GO_SOUTH "images/arrow-down.png"
 #define REPORTER_2 "Leon"
 #define REPORTER_3 "Colette"
 #define REPORTER_4 "James"
