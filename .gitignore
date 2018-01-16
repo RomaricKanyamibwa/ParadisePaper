@@ -73,9 +73,11 @@ dkms.conf
 *.lai
 
 # Executables
+ParadisePaper
 
 # End of https://www.gitignore.io/api/c,c++
 Images_tmp/
 Sites/
 .depends
+Temp
 CB/

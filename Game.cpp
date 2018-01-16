@@ -23,7 +23,9 @@ GameInformation DataPlayer;
 Continent World(WORLD,0,0,0,0,IMAGE_WORLD);
 std::vector<Country> europe=get_Europe();
 Continent Europe(EUROPE,0,0,0,0,europe);
+Continent South_Europe(SOUTH_EUROPE,0,0,0,0,europe);
 Continent North_America(NORTH_AMERICA,0,0,0,0);
+Continent Central_America(CENTRAL_AMERICA,0,0,0,0);
 Continent Africa(AFRICA,0,0,0,0);
 
 std::vector<Continent> continents=read_Continents();
@@ -40,6 +42,7 @@ float Go_Back_spr_scale;
 sf::Texture Go_South;
 sf::Sprite Go_South_spr;
 float Go_Back_South_scale;
+bool isSouth;
 
 
 sf::Sprite reporter_sprite;
@@ -238,8 +241,8 @@ void Game::MouseAction()
     else
     {
         std::cout<<"Continent:"<<get_country(localPosition.x,localPosition.y,Europe).getName()<<std::endl;
-        std::cout<<"GOOO BACK:"<<Go_Back_spr.getPosition().x<<","<<Go_Back_spr.getPosition().y<<std::endl;
-        std::cout<<"GOOO BACK2:"<<Go_Back_spr.getPosition().x+GO_BACK_WIDTH*0.5<<","<<Go_Back_spr.getPosition().y+GO_BACK_HEIGHT*0.5<<std::endl;
+        std::cout<<"GOOO BACK:"<<Go_South_spr.getPosition().x<<","<<Go_South_spr.getPosition().y<<std::endl;
+        std::cout<<"GOOO BACK2:"<<Go_South_spr.getPosition().x+GO_SOUTH_WIDTH*0.2<<","<<Go_South_spr.getPosition().y+GO_SOUTH_HEIGTH*0.2<<std::endl;
         std::cout<<"MOUSE:"<<sf::Mouse::getPosition(_mainWindow).x<<","<<sf::Mouse::getPosition(_mainWindow).y<<std::endl;
         if(sf::Mouse::getPosition(_mainWindow).x>=Go_Back_spr.getPosition().x
            && sf::Mouse::getPosition(_mainWindow).x<=Go_Back_spr.getPosition().x+GO_BACK_WIDTH*0.5
@@ -248,10 +251,27 @@ void Game::MouseAction()
         {
             std::cout<<"GOOO BACK!!!!!!!!!!!"<<std::endl;
             load_continent(World);
+            return;
         }
-        if(continent==EUROPE||continent==WORLD)
+        if(continent==EUROPE||continent==NORTH_AMERICA
+        ||continent==SOUTH_EUROPE||continent==CENTRAL_AMERICA)
         {
-
+            if(sf::Mouse::getPosition(_mainWindow).x>=Go_South_spr.getPosition().x
+            && sf::Mouse::getPosition(_mainWindow).x<=Go_South_spr.getPosition().x+GO_SOUTH_WIDTH*0.2
+            && sf::Mouse::getPosition(_mainWindow).y>=Go_South_spr.getPosition().y
+            && sf::Mouse::getPosition(_mainWindow).y<=Go_South_spr.getPosition().y+GO_SOUTH_HEIGTH*0.2)
+            {
+                if(continent==EUROPE)
+                    load_continent(South_Europe,false);
+                else if(continent==NORTH_AMERICA)
+                    load_continent(Central_America,false);
+                else if(continent==SOUTH_EUROPE)
+                    load_continent(Europe,false);
+                else
+                    load_continent(North_America);
+                isSouth=!isSouth;
+                return;
+            }
         }
 
     }
@@ -289,23 +309,31 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
         _mainWindow.draw(reporter_sprite);
         if(continent!=WORLD)
             disp_go_back();
+        if(continent==EUROPE||continent==NORTH_AMERICA
+        ||continent==SOUTH_EUROPE||continent==CENTRAL_AMERICA)
+        {
+            disp_go_south();
+        }
         Playing_func(player_sprite,money_sprite,missions_sprite);
         if(continent==WORLD)
         {
             dialog_sprite.setPosition(sf::Vector2f(reporter1.getWidth_image(),Game_HEIGHT-DIALOG3_HEIGHT));
-            _mainWindow.draw(dialog_sprite);
-            WriteDialogBox(Dialog);
         }
         else
         {
-            dialog_sprite.setPosition(sf::Vector2f(0,Game_HEIGHT-DIALOG3_HEIGHT));
-            _mainWindow.draw(dialog_sprite);
-            std::string dialog_place="Bonjour "+DataPlayer.getPlayer().getName()+".Bienvenue en "+continent;
-            dialog_place+=".Vous devez trouver le pays ou se situe le siege social de "+companies[0].getName();
-            dialog_place+=".Vous pensez que la siege est a quelle pays?";
-            fit_string_in_dialog_box(dialog_place);
-            WriteDialogBox(dialog_place);
+            if(continent==EUROPE)
+                dialog_sprite.setPosition(sf::Vector2f(0,Game_HEIGHT-DIALOG3_HEIGHT));
+            else
+                dialog_sprite.setPosition(sf::Vector2f(reporter1.getWidth_image(),Game_HEIGHT-DIALOG3_HEIGHT));
+
+            Dialog="Bonjour "+DataPlayer.getPlayer().getName()+".Bienvenue en "+continent;
+            Dialog+=".Vous devez trouver le pays ou se situe le siege social de "+companies[0].getName();
+            Dialog+=".Vous pensez que la siege est a quelle pays?";
+            fit_string_in_dialog_box(Dialog);
+
         }
+        _mainWindow.draw(dialog_sprite);
+        WriteDialogBox(Dialog);
         _mainWindow.draw(Multinational_sprite);
         _mainWindow.display();
     }
@@ -359,7 +387,7 @@ void Game::ShowIntro()
         startScreen.ShowIntro(_mainWindow,IMAGE_MALE_WORLD);
 	_gameState = Game::Playing;
 	//std::cout<<"Dialog:"<<Dialog<<std::endl;
-	Dialog="Hi "+DataPlayer.getPlayer().getName()+"."+Dialog.replace(Dialog.find("_"),1,companies[0].getName());
+	Dialog="Bonjour "+DataPlayer.getPlayer().getName()+"."+Dialog.replace(Dialog.find("_"),1,companies[0].getName());
 	//std::cout<<"Dialog:"<<Dialog<<std::endl;
     //Dialog.replace(Dialog.begin(),Dialog.end(),'\n',' ');
     //std::cout<<"Dialog:"<<Dialog<<std::endl;
@@ -402,6 +430,7 @@ Journalist Game::CreatePerson()
 
 void Game::initAttributes () {
     Game::text.setFont(font);
+    isSouth=false;
     DataPlayer.setCurrent_Continent(World);
     if (!Game::font.loadFromFile(FONT_FILE))
     {
@@ -449,6 +478,25 @@ void Game::disp_go_back()
 }
 
 
+
+
+void Game::disp_go_south()
+{
+    if(isSouth)
+        Go_South_spr=getSprite(Go_South,Display(IMAGE_GO_NORTH));
+    else
+        Go_South_spr=getSprite(Go_South,Display(IMAGE_GO_SOUTH));
+    Go_South_spr.scale(0.2,0.20);
+//    if(companies[0].getHeight_image()>250 || companies[0].getWidth_image()>250)
+//        Go_Back_spr_scale=0.25;
+//    else
+//        Go_Back_spr_scale=0.4;
+    Go_South_spr.setPosition(sf::Vector2f(0,Go_Back_spr_scale*companies[0].getHeight_image()+GO_BACK_HEIGHT));
+    //std::cout<<"GGGGGOOOOO SOUTGH"<<std::endl;
+    _mainWindow.draw(Go_South_spr);
+}
+
+
 void change_reporter(std::string continent_name)
 {
     if(continent_name==WORLD)
@@ -471,12 +519,11 @@ void change_reporter(std::string continent_name)
     }
 }
 
-void Game::load_continent(Continent cont)
+void Game::load_continent(Continent cont,bool payment)
 {
-    if(cont.getName()==EUROPE
-       ||cont.getName()==WORLD
-       ||cont.getName()==AFRICA
-       ||cont.getName()==NORTH_AMERICA)
+    if(cont.getName()==EUROPE||cont.getName()==SOUTH_EUROPE
+       ||cont.getName()==WORLD||cont.getName()==AFRICA
+       ||cont.getName()==CENTRAL_AMERICA||cont.getName()==NORTH_AMERICA)
     {
         if(cont.getName()==DataPlayer.getCurrent_Continent().getName())
             return;
@@ -486,12 +533,17 @@ void Game::load_continent(Continent cont)
         _mainWindow.clear();
         _mainWindow.create(sf::VideoMode(cont.getWidth_image(),cont.getHeight_image(),32),"Paradise Papers");
         std::cout<<"Changing Continent:"<<cont.getName()<<std::endl;
-        DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()-10);
+        if(payment)
+        {
+            DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()-10);
+            //isSouth=false;
+        }
         Game_HEIGHT=cont.getHeight_image();
         Game_WIDTH=cont.getWidth_image();
 
     }
-    std::cout<<"NOT Changing Continent:"<<cont.getName()<<std::endl;
+    else
+        std::cout<<"NOT Changing Continent:"<<cont.getName()<<std::endl;
 
 }
 
@@ -502,9 +554,17 @@ void Game::config_continent_images()
     Europe.setHeight_image(EUROPE_HEIGHT);
     Europe.setImage(IMAGE_EUROPE);
 
+    South_Europe.setWidth_image(SOUTH_EUROPE_WIDTH);
+    South_Europe.setHeight_image(SOUTH_EUROPE_HEIGHT);
+    South_Europe.setImage(IMAGE_SOUTH_EUROPE);
+
     North_America.setWidth_image(NORTH_AMERICA_WIDTH);
     North_America.setHeight_image(NORTH_AMERICA_HEIGHT);
     North_America.setImage(IMAGE_NORTH_AMERICA);
+
+    Central_America.setWidth_image(CENTRAL_AMERICA_WIDTH);
+    Central_America.setHeight_image(CENTRAL_AMERICA_HEIGHT);
+    Central_America.setImage(IMAGE_CENTRAL_AMERICA);
 
     Africa.setWidth_image(AFRICA_WIDTH);
     Africa.setHeight_image(AFRICA_HEIGHT);

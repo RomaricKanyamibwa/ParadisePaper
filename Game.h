@@ -183,9 +183,10 @@ private:
   static void MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::Sprite& missions_sprite);
   static void WriteDialogBox(std::string msg);
   static void config_continent_images();
-  static void load_continent(Continent continent);
+  static void load_continent(Continent continent,bool payment=true);
   static void MouseAction();
   static void disp_go_back();
+  static void disp_go_south();
 
 
 };
