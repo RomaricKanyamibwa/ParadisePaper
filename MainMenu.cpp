@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 #include <iostream>
 #include "Global_Define.h"
+#include "Game.h"
 
 bool createcharacter=false;
 // Constructors/Destructors
@@ -70,8 +71,10 @@ MainMenu::MenuResult MainMenu::ShowCreate(sf::RenderWindow& window)
 	person_f.loadFromFile("images/Female.png");
 	person_m.loadFromFile("images/Male.png");
 	choice_im.loadFromFile("images/Choice.png");
-	name_f.loadFromFile("images/Rania.png");
-	name_m.loadFromFile("images/Ross.png");
+	name_f.loadFromFile(IMAGE_FEMALE_Name);
+	name_f.setSmooth(true);
+	name_m.loadFromFile(IMAGE_MALE_NAME);
+	name_m.setSmooth(true);
 
 	sf::Sprite sprite;
 	sf::Sprite sprite1;
@@ -140,18 +143,18 @@ MainMenu::MenuResult MainMenu::HandleClick(int x, int y)
 			&& menuItemRect.top < y
 			&& menuItemRect.left < x
 			&& menuItemRect.width> x)
-			{
-			    if((*it).action==Male)
-                    std::cout<<"MALE"<<std::endl;
-                if((*it).action==Female)
-                    std::cout<<"FEMALE"<<std::endl;
-                if((*it).action==Exit)
-                {
-                    std::cout<<"EXIT"<<std::endl;
-                    return (*it).action;
-                }
-				return (*it).action;
-			}
+        {
+            if((*it).action==Male)
+                std::cout<<"MALE"<<std::endl;
+            if((*it).action==Female)
+                std::cout<<"FEMALE"<<std::endl;
+            return (*it).action;
+        }
+        if((*it).action==Exit)
+        {
+            std::cout<<"EXIT"<<std::endl;
+            return (*it).action;
+        }
 	}
 
 	return Nothing;
@@ -167,6 +170,12 @@ MainMenu::MenuResult  MainMenu::GetMenuResponse(sf::RenderWindow& window)
 
 		while(window.pollEvent(menuEvent))
 		{
+		    if(menuEvent.type == sf::Event::Closed)
+			{
+			    window.close();
+			    Game::_gameState=Game::Exiting;
+				return Exit;
+			}
 			if(menuEvent.type == sf::Event::MouseButtonPressed)
 			{
 			    std::cout<<"X:"<<menuEvent.mouseButton.x<<",Y:"<<menuEvent.mouseButton.y<<std::endl;
@@ -179,10 +188,7 @@ MainMenu::MenuResult  MainMenu::GetMenuResponse(sf::RenderWindow& window)
                 else
                     return res;
 			}
-			if(menuEvent.type == sf::Event::Closed)
-			{
-				return Exit;
-			}
+
 		}
 	}
 }

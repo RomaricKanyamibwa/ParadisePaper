@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "StartScreen.h"
+#include "Global_Define.h"
+#include "Game.h"
 
 // Constructors/Destructors
 //
@@ -25,15 +27,27 @@ StartScreen::~StartScreen () { }
 void StartScreen::Show(sf::RenderWindow & renderWindow)
 {
 	sf::Texture image;
+	sf::Texture image_press;
 	if(!image.loadFromFile("images/StartScreen.jpg"))
 	{
 		return;
 	}
 
-	sf::Sprite sprite;
-	sprite.setTexture(image);
+    if(!image_press.loadFromFile(PRESS_ANY))
+	{
+		return;
+	}
 
-	renderWindow.draw(sprite);
+	sf::Sprite sprite;
+	sf::Sprite sprite2;
+	sprite.setTexture(image);
+	image_press.setSmooth(true);
+	sprite2.setTexture(image_press);
+
+	sprite2.setPosition(sf::Vector2f(1200.0/2.0-293,667.0/2.0-100));
+	//sprite2.setColor(sf::Color(255, 255, 255, 255)); // half transparent
+    renderWindow.draw(sprite);
+	renderWindow.draw(sprite2);
 	renderWindow.display();
 
 	sf::Event event;
@@ -48,6 +62,7 @@ void StartScreen::Show(sf::RenderWindow & renderWindow)
 			}
 			else if(event.type == sf::Event::EventType::Closed )
                 renderWindow.close();
+                Game::_gameState=Game::Exiting;
 		}
 	}
 }

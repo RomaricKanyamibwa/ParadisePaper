@@ -7,6 +7,8 @@
 #include "Journalist.h"
 #include "Person.h"
 #include "Continent.h"
+#include "MainMenu.h"
+#include "StartScreen.h"
 
 
 /**
@@ -37,6 +39,8 @@ public:
   static sf::Text text;
   static sf::Font font;
   static sf::Music music;
+  friend class StartScreen;
+  friend class MainMenu;
 
   // Public attributes
   //

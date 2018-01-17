@@ -1,4 +1,6 @@
 Europe 510,71,652,179
 Amerique_du_Nord 29,35,315,301
 Afrique 487,216,744,481
-Amerique_du_Sud 0,0,0,0
+Amerique_du_Sud 213,334,370,629
+Asie 778,51,1064,349
+Oceanie 1008,413,1214,558

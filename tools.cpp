@@ -191,8 +191,14 @@ Continent get_continent(int X,int Y,std::vector<Continent> continents)
         return Europe;
     if(cont.getName()==NORTH_AMERICA)
         return North_America;
+    if(cont.getName()==SOUTH_AMERICA)
+        return South_America;
     if(cont.getName()==AFRICA)
         return Africa;
+    if(cont.getName()==ASIA)
+        return Asia;
+    if(cont.getName()==OCEANIA)
+        return Oceania;
     return cont;
 }
 
@@ -311,9 +317,6 @@ int Game(sf::RenderWindow& window)
 
 int main(int argc,char* argv[])
 {
-    //std::string str=PHRASE_EXPLORE2;
-    //fit_string_in_dialog_box(str);
-    //std::cout<<str<<"\nsize=>"<<str.size()<<std::endl;
 	Game::Start();
 	Game::music.stop();
 	return 0;
