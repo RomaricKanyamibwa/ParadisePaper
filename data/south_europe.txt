@@ -1,0 +1,21 @@
+﻿France,209,146,391,376
+Allemagne, 453,30,546,204
+Espagne, 51,331,202,513
+Portugual,12,368,44,485
+Angleterre,227,3,315,98
+Grèce,77,457,915,621
+Italie,434,304,584,485
+Belgique,355,106,403,142
+Pay-Bays,395,41,415,93
+Suisse,426,240,484,266
+Luxembourg,405,148,423,162
+Pologne,605,6,762,108
+Autriche,569,211,632,253
+Republique-Tcheque,568,137,659,183
+Slovaquie,
+Hongrie,
+Roumanie,
+Bulgarie,
+Croatie
+Slovaquie
+Serbie

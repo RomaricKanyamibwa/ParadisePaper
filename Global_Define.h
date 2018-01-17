@@ -27,6 +27,9 @@
 #define IMAGE_AFRICA "images/Africa.jpg"
 #define IMAGE_WORLD "images/Continents-of-the-World.jpg"
 
+#define COUNTRY_IMAGE "images/country_screen.png"
+#define COUNTRY_WIDTH 1080
+#define COUNTRY_HEIGHT 720
 
 #define IMAGE_DIALOG "images/Dialog.png"
 #define IMAGE_DIALOG2 "images/Dialog2.png"
@@ -96,8 +99,10 @@
 
 #define WORLD_FILE "data/continents.txt"
 #define EUROPE_FILE "data/Europe.txt"
+#define SOUTH_EUROPE_FILE "data/south_europe.txt"
 #define ASIA_FILE "data/asia.txt"
 #define NORTH_AMERICA_FILE "data/north_america.txt"
+#define CENTRAL_AMERICA_FILE "data/central_america.txt"
 #define SOUTH_AMERICA_FILE "data/south_america.txt"
 #define AFRICA_FILE "data/africa.txt"
 #define OCEANIA_FILE "data/oceania.txt"
@@ -149,7 +154,7 @@ extern std::string::size_type MAX_DIALOG_PHRASE_LENGTH;
 extern short int MAX_PHRASES;
 extern std::vector<Country> europe;
 extern std::ostream& operator<<(std::ostream & out, Country p);
-extern std::vector<Country> get_Europe();
+extern std::vector<Country> create_continent(std::string file_name);
 extern std::vector<Continent> read_Continents();
 extern Country get_country(int X,int Y,Continent continent);
 extern Continent get_continent(int X,int Y,std::vector<Continent> world);

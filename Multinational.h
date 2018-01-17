@@ -102,6 +102,7 @@ private:
   //
 
   std::string Name;
+  std::string Hint_Location;
   Country Siege;
   std::string Description;
 public:
@@ -165,6 +166,22 @@ public:
    */
   std::string getDescription ()   {
     return Description;
+  }
+
+  /**
+   * Set the value of Hint_Location
+   * @param new_var the new value of Hint_Location
+   */
+  void setHint_Location (std::string new_var)   {
+      Hint_Location = new_var;
+  }
+
+  /**
+   * Get the value of Hint_Location
+   * @return the value of Hint_Location
+   */
+  std::string getHint_Location ()   {
+    return Hint_Location;
   }
 private:
 

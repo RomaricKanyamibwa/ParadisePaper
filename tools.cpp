@@ -23,11 +23,11 @@ std::ostream& operator<<(std::ostream & out, Country p)
 
 }
 //France, 200, 513, 324, 636
-std::vector<Country> get_Europe()
+std::vector<Country> create_continent(std::string file_name)
 {
     std::string line;
-    std::ifstream myfile (EUROPE_FILE);
-    std::vector<Country> Europe;
+    std::ifstream myfile (file_name);
+    std::vector<Country> continent;
     if (myfile.is_open())
     {
         while ( getline (myfile,line) )
@@ -41,14 +41,17 @@ std::vector<Country> get_Europe()
             if(!Nom.empty())
             {
                 Country Country(Nom,xg,yh,xd,yb);
-                Europe.push_back(Country);
+                Country.setImage(COUNTRY_IMAGE);
+                Country.setWidth_image(COUNTRY_WIDTH);
+                Country.setHeight_image(COUNTRY_HEIGHT);
+                continent.push_back(Country);
             }
         }
-    std::cout<<"Europe Loaded sucessfully"<<std::endl;
+    std::cout<<"The Continent of "<<file_name<<" has been loaded successfully"<<std::endl;
     myfile.close();
     }
-    else std::cerr << "Unable to open file"<<std::endl;
-    return Europe;
+    else std::cerr << "Unable to open "<<file_name<<" file"<<std::endl;
+    return continent;
 }
 
 std::vector<Continent> read_Continents()
@@ -91,7 +94,7 @@ std::vector<Continent> read_Continents()
 
 Country get_country(int X,int Y,Continent continent)
 {
-    Country country;
+    Country country("",0,0,0,0);
     std::vector<int> Pos;
     for(auto & value: continent.getCountries()) {
         if(X>=value.getPosition()[0] && X<=value.getPosition()[2]
@@ -140,6 +143,7 @@ Multinational create_Multinational(std::string Name)
         if (myfile.is_open())
     {
         std::string image;
+        std::string hint;
         std::string descr;
         Country siege;
         int height,width;
@@ -155,10 +159,22 @@ Multinational create_Multinational(std::string Name)
         else std::cerr << "Unable to get "<<Name<<"'s image."<<std::endl;
 
         if(getline (myfile,line))
+            hint=line;
+        else std::cerr << "Unable to get "<<Name<<"'s hint."<<std::endl;
+
+        if(getline (myfile,line))
             descr=line;
         else std::cerr << "Unable to get "<<Name<<"'s description."<<std::endl;
+        std::stringstream ss;
+        int xg,yh,xd,yb;
+        std::string Nom;
         if(getline (myfile,line))
-            siege=Country(line,0,0,0,0);
+        {
+            replace(line.begin(), line.end(), ',', ' ');
+            ss<<line;
+            ss>>Nom>>xg>>yh>>xd>>yb;
+            siege=Country(Nom,xg,yh,xd,yb);
+        }
         else std::cerr << "Unable to get "<<Name<<"'s siege."<<std::endl;
         while ( getline (myfile,line) )
         {
@@ -166,6 +182,7 @@ Multinational create_Multinational(std::string Name)
         }
         std::cout<<Name<<" was successfully created."<<std::endl;
         m=Multinational(image,Name,siege,descr);
+        m.setHint_Location(hint);
         m.setWidth_image(width);
         m.setHeight_image(height);
         m.m_societes_ecranVector=societes_ecran;
@@ -240,7 +257,7 @@ int Game(sf::RenderWindow& window)
 
   //window(sf::VideoMode(940, 680,32),"Paradises Papers");
   std::string Name="";
-  std::vector<Country> europe=get_Europe();
+  std::vector<Country> europe=create_continent(EUROPE_FILE);
   Continent Europe("Europe",0,0,0,0,europe);
   Europe.setImage("Europe.png");
   Journalist reporter("Nadia et Pete","Reporter.png");

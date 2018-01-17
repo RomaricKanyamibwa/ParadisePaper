@@ -6,7 +6,7 @@
 #include <vector>
 #include "Display.h"
 #include "Person.h"
-
+#include <iostream>
 
 /**
   * class Place
@@ -108,7 +108,9 @@ public:
       {
           b=this->Position[i++]==value && b;
       }
-      return this->Name.compare(c.getName()) && b;
+      std::cout<<"Position:Result of =="<<(b)<<std::endl;
+      std::cout<<"Result of =="<<(this->Name.compare(c.getName())==0 && b)<<std::endl;
+      return (this->Name.compare(c.getName())==0) && b;
   }
 
   /**

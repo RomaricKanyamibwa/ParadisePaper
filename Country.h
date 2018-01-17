@@ -24,7 +24,7 @@ public:
    * Empty Constructor
    */
    Country();
-  Country (std::string Nom, int xg, int yh, int xd, int yb);
+   Country (std::string Nom, int xg, int yh, int xd, int yb);
 
   /**
    * Empty Destructor

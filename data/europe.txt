@@ -1,28 +1,15 @@
-France, 200, 513, 324, 636
-Allemagne, 374, 401,440,512
-Espagne, 92,635,156,766
-Portugual, 10, 657,44,753
-Ireland, 105,331,151,387
-Angleterre, 204,286,261,420
-Suède, 502,90,543,288
-Grèce, 633,731,722,818
-Italie, 358,604,488,828
-Belgique, 298,517,331,553
-Suisse, 344,649,396,679
-Luxembourg,331,554,349,574
-Finlande, 569,88,636,213
-Norvège, 360,181,437,302
-Danemak,391,340,433,405
-Pologne, 501,437, 629,531
-Estonie, 595,267,653,301
-Lettonie
-Lithuanie
-Autriche,
-République Tchèque,
-Slovaquie,
-Hongrie,
-Roumanie,
-Bulgarie,
-Croatie
-Slovaquie
-Serbie
+﻿Allemagne, 467,451,592,594
+Ireland, 151,398,197,474
+Angleterre,212,309,336,517 
+Suede, 592,136,676,393 
+Finlande, 708,65,802,230
+Norvege, 468,49,550,280
+Danemark,488,363,553,433
+Pologne, 602,458,791,553
+Estonie, 747,285,816,315
+Islande, 159,64,242,112
+Lettonie,738,331,825,375
+Lithuanie,726,386,801,433
+Bielorussie,834,390,920,501
+Russie,886,20,1182,480
+Bays-Bas,401,490,426,529

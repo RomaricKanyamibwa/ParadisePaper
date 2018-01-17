@@ -188,6 +188,7 @@ private:
   static void WriteDialogBox(std::string msg);
   static void config_continent_images();
   static void load_continent(Continent continent,bool payment=true);
+  static void load_country(Country country);
   static void MouseAction();
   static void disp_go_back();
   static void disp_go_south();
