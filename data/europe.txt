@@ -1,4 +1,5 @@
-﻿Allemagne, 467,451,592,594
+﻿Lichteinstein
+Allemagne, 467,451,592,594
 Ireland, 151,398,197,474
 Angleterre,212,309,336,517 
 Suede, 592,136,676,393 
@@ -12,4 +13,4 @@ Lettonie,738,331,825,375
 Lithuanie,726,386,801,433
 Bielorussie,834,390,920,501
 Russie,886,20,1182,480
-Bays-Bas,401,490,426,529
+Pays-Bas,401,490,426,529

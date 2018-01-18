@@ -1,0 +1,5 @@
+whirlpool.png 450 150
+Amerique du Nord
+Whirlpool Corporation est une entreprise  specialisee dans la conception, la fabrication et la distribution d'appareils electromenagers.
+Etas-Unis,414,335,785,481
+Bermuda,898,462,957,490

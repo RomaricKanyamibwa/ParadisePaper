@@ -2,8 +2,8 @@ Glencore.jpg 350 194
 Europe du Sud ou Europe Central
 Glencore est une importante entreprise de negoce, courtage et d'extraction de matieres premieres.
 Suisse,426,240,484,266
-Bermudes
-Island
-Congo
-Burkina Faso
-Iles vierges britanniques 
+Bermuda,898,462,957,490
+Islande, 159,64,242,112
+Republique-du-Congo,505,359,597,455
+Burkina-Faso,285,257,323,278
+Iles-vierges-britanniques,1026,261,1121,304

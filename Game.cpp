@@ -518,7 +518,7 @@ void Game::initAttributes () {
     else
         std::cout<<"MusicLoaded"<<std::endl;
     Game::music.play();
-    Game::music.pause();
+    //Game::music.pause();
     Game::music.setLoop(true);
 }
 
@@ -612,7 +612,7 @@ void Game::load_continent(Continent cont,bool payment)
        ||cont.getName()==WORLD||cont.getName()==AFRICA||cont.getName()==SOUTH_AMERICA
        ||cont.getName()==CENTRAL_AMERICA||cont.getName()==NORTH_AMERICA||cont.getName()==OCEANIA)
     {
-        if(cont.getName()==DataPlayer.getCurrent_Continent().getName()&&isCountry==false)
+        if(cont==DataPlayer.getCurrent_Continent()&&isCountry==false)
             return;
         change_reporter(cont.getName());
         continent=cont.getName();
@@ -624,7 +624,7 @@ void Game::load_continent(Continent cont,bool payment)
             if(companies.size()<=0)
                 _gameState=Game::Exiting;
             mission_accomplished=false;
-            DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()+100);
+            DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()+110);
             DataPlayer.setCompleted_Missions(DataPlayer.getCompleted_Missions()+1);
             load_multinational();
 

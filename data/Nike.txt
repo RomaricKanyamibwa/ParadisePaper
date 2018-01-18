@@ -1,0 +1,7 @@
+nike.png 350 126
+Amerique du Nord
+Nike est une entreprise specialisee dans la fabrication d'articles de sport (chaussures, vetements et materiel de sport). 
+Etas-Unis,414,335,785,481
+Pay-Bays,395,41,415,93
+Iles-Cayman,637,249,708,276
+Pays-Bas,401,490,426,529

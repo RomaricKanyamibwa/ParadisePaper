@@ -1,0 +1,5 @@
+apple.png 350 350
+Amerique du Nord
+Apple est une entreprise multinationale qui concoit et commercialise des produits electroniques grand public, des ordinateurs personnels et des logiciels informatiques.
+Etas-Unis,414,335,785,481
+Ireland, 151,398,197,474

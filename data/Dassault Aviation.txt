@@ -1,1 +1,6 @@
-dassault_aviation.png 745 745
+dassault_aviation.png 350 350
+Europe Central
+Dassault Aviation est un groupe aeronautique dual qui propose des avions militaires et des avions d’affaires.
+France,209,146,391,376
+Angleterre,227,3,315,98
+Angleterre,212,309,336,517 
