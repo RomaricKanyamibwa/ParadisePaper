@@ -45,6 +45,11 @@
 #define START_SCREEN "images/StartScreen.jpg"
 #define PRESS_ANY "images/Press_any.png"
 #define PLAYER_SCREEN "images/PlayerScreen.png"
+#define GAME_OVER_SCREEN "images/game-over.png"
+#define GAME_OVER_WIN_SCREEN "images/game-over-win.png"
+
+#define GAME_OVER_WIDTH 834.0
+#define GAME_OVER_HEIGHT 500.0
 
 #define IMAGE_MONEY "images/Money.png"
 #define IMAGE_MISSIONS "images/Missions.png"
@@ -98,7 +103,7 @@
 
 
 #define WORLD_FILE "data/continents.txt"
-#define EUROPE_FILE "data/Europe.txt"
+#define EUROPE_FILE "data/europe.txt"
 #define SOUTH_EUROPE_FILE "data/south_europe.txt"
 #define ASIA_FILE "data/asia.txt"
 #define NORTH_AMERICA_FILE "data/north_america.txt"

@@ -84,7 +84,7 @@ private:
   // Static Private attributes
   //
   enum GameState { Uninitialized, ShowingStart, Paused,Introduction,
-					ShowingMenu,CreateCharacter,Playing, Exiting };
+					ShowingMenu,CreateCharacter,Playing, Exiting,Game_over};
   static GameState _gameState;
   static sf::RenderWindow _mainWindow;
   //player
@@ -97,41 +97,6 @@ private:
 public:
 
 
-  // Private attribute accessor methods
-  //
-//
-//
-//  /**
-//   * Set the value of _gameState
-//   * @param new_var the new value of _gameState
-//   */
-//  void set_gameState (GameState new_var)   {
-//      Game::_gameState = new_var;
-//  }
-//
-//  /**
-//   * Get the value of _gameState
-//   * @return the value of _gameState
-//   */
-//  GameState get_gameState ()   {
-//    return Game::_gameState;
-//  }
-//
-//  /**
-//   * Set the value of _mainWindow
-//   * @param new_var the new value of _mainWindow
-//   */
-//  void set_mainWindow (sf::RenderWindow new_var)   {
-//      Game::_mainWindow = new_var;
-//  }
-//
-//  /**
-//   * Get the value of _mainWindow
-//   * @return the value of _mainWindow
-//   */
-//  sf::RenderWindow get_mainWindow ()   {
-//    return Game::_mainWindow;
-//  }
 
   static void Start();
 private:
@@ -182,6 +147,7 @@ private:
   static void ShowStartScreen();
   static void ShowMenu();
   static void ShowIntro();
+  static void ShowGameOver(bool win);
   static Journalist CreatePerson();
   static void Playing_func(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::Sprite& missions_sprite);
   static void MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::Sprite& missions_sprite);

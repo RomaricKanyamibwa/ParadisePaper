@@ -57,6 +57,7 @@ float Go_Back_South_scale;
 bool isSouth;
 bool isCountry;
 bool mission_accomplished;
+bool win;
 
 
 sf::Sprite reporter_sprite;
@@ -230,6 +231,12 @@ void Game::GameLoop(Place place,Person pers)
                 _mainWindow.close();
                 break;
             }
+        case Game::Game_over:
+            {
+                ShowGameOver(win);
+                _gameState=Game::Exiting;
+                break;
+            }
         default:
             {
                 break;
@@ -240,16 +247,17 @@ void Game::GameLoop(Place place,Person pers)
 
 void Game::load_country(Country country)
 {
-    isCountry=true;
     DataPlayer.addCountry(country);
     DataPlayer.setCurrent_Country(country);
-    DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()-50);
     std::cout<<"You are going to "<<country.getName()<<"."<<std::endl;
     _mainWindow.clear();
     _mainWindow.create(sf::VideoMode(COUNTRY_WIDTH,COUNTRY_HEIGHT,32),"Paradise Papers");
-    std::cout<<"Going to "<<country.getName()<<std::endl;
+    std::cout<<"You have arrived at "<<country.getName()<<std::endl;
     Game_HEIGHT=COUNTRY_HEIGHT;
     Game_WIDTH=COUNTRY_WIDTH;
+    DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()-50);
+    isCountry=true;
+
 
 }
 
@@ -267,13 +275,19 @@ void Game::MouseAction()
         if(!isCountry)
         {
             Country country_tmp=get_country(localPosition.x,localPosition.y,DataPlayer.getCurrent_Continent());
-            std::cout<<"Continent:"<<country_tmp.getName()<<std::endl;
+            std::cout<<"Country:"<<country_tmp.getName()<<std::endl;
             if(!country_tmp.getName().empty())
+            {
+                if(DataPlayer.getPlayer().getMoney()<=49)
+                {
+                    win=false;
+                    _gameState=Game::Game_over;
+                    return;
+                }
                 load_country(country_tmp);
+                return;
+            }
         }
-    //        std::cout<<"GOOO BACK:"<<Go_South_spr.getPosition().x<<","<<Go_South_spr.getPosition().y<<std::endl;
-    //        std::cout<<"GOOO BACK2:"<<Go_South_spr.getPosition().x+GO_SOUTH_WIDTH*0.2<<","<<Go_South_spr.getPosition().y+GO_SOUTH_HEIGTH*0.2<<std::endl;
-    //        std::cout<<"MOUSE:"<<sf::Mouse::getPosition(_mainWindow).x<<","<<sf::Mouse::getPosition(_mainWindow).y<<std::endl;
         if(sf::Mouse::getPosition(_mainWindow).x>=Go_Back_spr.getPosition().x
            && sf::Mouse::getPosition(_mainWindow).x<=Go_Back_spr.getPosition().x+GO_BACK_WIDTH*0.5
            && sf::Mouse::getPosition(_mainWindow).y>=Go_Back_spr.getPosition().y
@@ -281,10 +295,12 @@ void Game::MouseAction()
         {
             std::cout<<"GOOO BACK!!!!!!!!!!!"<<std::endl;
             if(!isCountry)
-                load_continent(World);
+            {
+                load_continent(World,false);
+                isSouth=false;
+            }
             else
-                load_continent(DataPlayer.getCurrent_Continent());
-            isSouth=false;
+                load_continent(DataPlayer.getCurrent_Continent(),false);
             return;
         }
         if(continent==EUROPE||continent==NORTH_AMERICA
@@ -402,10 +418,6 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
             dialog_sprite.setPosition(sf::Vector2f(-50,Game_HEIGHT-DIALOG3_HEIGHT));
         else
             dialog_sprite.setPosition(sf::Vector2f(reporter1.getWidth_image(),Game_HEIGHT-DIALOG3_HEIGHT));
-//        if(continent!=WORLD)
-//        {
-//
-//        }
         _mainWindow.draw(dialog_sprite);
         WriteDialogBox(Dialog);
         _mainWindow.draw(Multinational_sprite);
@@ -415,7 +427,6 @@ void Game::MainGameLoop(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
 
 void Game::WriteDialogBox(std::string msg)
 {
-        //std::cout<<money_string<<std::endl;
         text.setString(msg);
         // set the character size
         text.setCharacterSize(20);
@@ -451,6 +462,17 @@ void Game::ShowMenu()
 	}
 }
 
+void Game::ShowGameOver(bool win)
+{
+    StartScreen startScreen;
+    std::cout<<"GAME OVER!!"<<std::endl;
+    _mainWindow.clear();
+    _mainWindow.create(sf::VideoMode(GAME_OVER_WIDTH,GAME_OVER_HEIGHT,32),"Paradise Papers");
+    if(win)
+        startScreen.ShowIntro(_mainWindow,GAME_OVER_WIN_SCREEN);
+    else
+        startScreen.ShowIntro(_mainWindow,GAME_OVER_SCREEN);
+}
 
 void Game::ShowIntro()
 {
@@ -460,13 +482,8 @@ void Game::ShowIntro()
     else
         startScreen.ShowIntro(_mainWindow,IMAGE_MALE_WORLD);
 	_gameState = Game::Playing;
-	//std::cout<<"Dialog:"<<Dialog<<std::endl;
 	Dialog="Bonjour "+DataPlayer.getPlayer().getName()+"."+Dialog.replace(Dialog.find("_"),1,companies[0].getName());
-	//std::cout<<"Dialog:"<<Dialog<<std::endl;
-    //Dialog.replace(Dialog.begin(),Dialog.end(),'\n',' ');
-    //std::cout<<"Dialog:"<<Dialog<<std::endl;
     fit_string_in_dialog_box(Dialog);
-    //std::cout<<"Dialog:"<<Dialog<<std::endl;
     load_multinational();
 }
 
@@ -482,7 +499,6 @@ Journalist Game::CreatePerson()
 	        Journalist rania(NAME_FEMALE,IMAGE_FEMALE,FEMALE_WIDTH,FEMALE_WIDTH);
 	        rania.setMoney(1000);
 	        rania.setSex(Person::Female);
-	        //Player=rania;
 	        return rania;
 	        break;
 	    }
@@ -491,7 +507,6 @@ Journalist Game::CreatePerson()
             Journalist ross(NAME_MALE,IMAGE_MALE,MALE_WIDTH,MALE_WIDTH);
             ross.setMoney(1000);
             ross.setSex(Person::Male);
-            //Player=ross;
             return ross;
             break;
         }
@@ -522,7 +537,7 @@ void Game::initAttributes () {
     Game::music.setLoop(true);
 }
 
-void /*Game::*/setDataPlayer()
+void setDataPlayer()
 {
     DataPlayer=GameInformation(Player,World);
     DataPlayer.setTotal_missions(5);
@@ -539,7 +554,6 @@ void load_multinational()
     Multinational_sprite.setPosition(sf::Vector2f(0,15));
     if(companies[0].getHeight_image()>250 || companies[0].getWidth_image()>250)
         Multinational_sprite.scale(0.25,0.25);
-        //(150/((float)companies[0].getWidth_image()),100/((float)companies[0].getHeight_image()));
     else
         Multinational_sprite.scale(0.4,0.4);
 }
@@ -568,12 +582,7 @@ void Game::disp_go_south()
     else
         Go_South_spr=getSprite(Go_South,Display(IMAGE_GO_SOUTH));
     Go_South_spr.scale(0.2,0.20);
-//    if(companies[0].getHeight_image()>250 || companies[0].getWidth_image()>250)
-//        Go_Back_spr_scale=0.25;
-//    else
-//        Go_Back_spr_scale=0.4;
     Go_South_spr.setPosition(sf::Vector2f(0,Go_Back_spr_scale*companies[0].getHeight_image()+GO_BACK_HEIGHT));
-    //std::cout<<"GGGGGOOOOO SOUTGH"<<std::endl;
     _mainWindow.draw(Go_South_spr);
 }
 
@@ -610,6 +619,12 @@ void change_reporter(std::string continent_name)
 
 void Game::load_continent(Continent cont,bool payment)
 {
+    if(DataPlayer.getPlayer().getMoney()<=0)
+    {
+        win=false;
+        _gameState=Game::Game_over;
+        return;
+    }
     if(cont.getName()==EUROPE||cont.getName()==SOUTH_EUROPE||cont.getName()==ASIA
        ||cont.getName()==WORLD||cont.getName()==AFRICA||cont.getName()==SOUTH_AMERICA
        ||cont.getName()==CENTRAL_AMERICA||cont.getName()==NORTH_AMERICA||cont.getName()==OCEANIA)
@@ -623,12 +638,16 @@ void Game::load_continent(Continent cont,bool payment)
         if(isCountry==true &&  mission_accomplished==true)
         {
             companies.erase(companies.begin());
+            DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()+100);
+            DataPlayer.setCompleted_Missions(DataPlayer.getCompleted_Missions()+1);
             if(companies.size()<=0 ||
                DataPlayer.getCompleted_Missions()>=DataPlayer.getTotal_missions())
-                _gameState=Game::Exiting;
+            {
+                _gameState=Game::Game_over;
+                win=true;
+                return;
+            }
             mission_accomplished=false;
-            DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()+110);
-            DataPlayer.setCompleted_Missions(DataPlayer.getCompleted_Missions()+1);
             load_multinational();
 
         }

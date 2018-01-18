@@ -108,8 +108,8 @@ public:
       {
           b=this->Position[i++]==value && b;
       }
-      std::cout<<"Position:Result of =="<<(b)<<std::endl;
-      std::cout<<"Result of =="<<(this->Name.compare(c.getName())==0 && b)<<std::endl;
+      //std::cout<<"Position:Result of =="<<(b)<<std::endl;
+      //std::cout<<"Result of =="<<(this->Name.compare(c.getName())==0 && b)<<std::endl;
       return (this->Name.compare(c.getName())==0) && b;
   }
 
