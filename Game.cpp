@@ -116,9 +116,9 @@ void Game::Start(void)
 	while(!IsExiting())
 	{
 	    if(isCountry)
-            GameLoop(DataPlayer.getCurrent_Country(),reporter1);
+            GameLoop(DataPlayer.getCurrent_Country(),&reporter1);
         else
-            GameLoop(DataPlayer.getCurrent_Continent(),reporter1);
+            GameLoop(DataPlayer.getCurrent_Continent(),&reporter1);
 	}
 	_mainWindow.close();
 }
@@ -163,7 +163,7 @@ void Game::Playing_func(sf::Sprite& player_sprite,sf::Sprite& money_sprite,sf::S
     }
 }
 
-void Game::GameLoop(Place place,Person pers)
+void Game::GameLoop(Place place,Person* pers)
 {
     std::string Name="";;
     sf::Texture texture;
@@ -173,7 +173,7 @@ void Game::GameLoop(Place place,Person pers)
     sf::Texture missions_texture;
 
     sf::Sprite player_sprite;
-    reporter_sprite=getSprite(texture2,pers);
+    reporter_sprite=getSprite(texture2,*pers);
     sf::Sprite money_sprite;
     sf::Sprite missions_sprite;
     if(playing==1)
@@ -214,7 +214,7 @@ void Game::GameLoop(Place place,Person pers)
         case Game::Introduction:
             {
                 _mainWindow.create(sf::VideoMode(WORLD_WIDTH,WORLD_HEIGHT,32),"Paradise Papers");
-                World.setPerson(reporter1);
+                World.setPerson(&reporter1);
                 setDataPlayer();
                 ShowIntro();
                 std::cout<<"DisplayIntro"<<std::endl;
@@ -345,18 +345,17 @@ void Introduction_Dialog(bool publish=false)
     {
         if(isCountry)
         {
-            Dialog="Bonjour "+DataPlayer.getPlayer().getName()+" et bienvenue en "+DataPlayer.getCurrent_Country().getName();
-            Dialog+=".Je suis "+reporter1.getName();
+            Dialog=reporter1.greeting(DataPlayer.getPlayer().getName(),DataPlayer.getCurrent_Country().getName());
             std::cout<<"Siege:"<<companies[0].getSiege()<<std::endl;
             std::cout<<"Current:"<<DataPlayer.getCurrent_Country()<<std::endl;
 
             if(companies[0].getSiege()==DataPlayer.getCurrent_Country())
             {
-                Dialog+=" et je voundais vous feliciter, vous avez trouve le siege social de "+companies[0].getName()+".Maintenant vous pouvez publier votre article et gagner d'argent.";
+                Dialog+="Je vous felicite, vous avez trouve le siege social de "+companies[0].getName()+".Maintenant vous pouvez publier votre article et gagner d'argent.";
                 mission_accomplished=true;
             }
             else
-                Dialog+=".Le siege de "+companies[0].getName()+"? Malheuresement vous vous etes trompe c'est pas ici.Je pense leur siege se trouve en "+companies[0].getHint_Location()+".";
+                Dialog+="Le siege de "+companies[0].getName()+"? Malheuresement vous vous etes trompe c'est pas ici.Je pense leur siege se trouve en "+companies[0].getHint_Location()+".";
 
             fit_string_in_dialog_box(Dialog);
             return;
@@ -548,7 +547,8 @@ void setDataPlayer()
 
 void load_multinational()
 {
-    if(companies.size()<=0)
+    std::cout<<"MULTINATIONAL"<<std::endl;
+    if(win)
         return;
     Multinational_sprite=getSprite(Multinational_texture,companies[0]);
     Multinational_sprite.setPosition(sf::Vector2f(0,15));
@@ -560,6 +560,8 @@ void load_multinational()
 
 void Game::disp_go_back()
 {
+    if(win)
+        return;
     Go_Back_spr=getSprite(Go_Back,Display(GO_BACK,GO_BACK_WIDTH,GO_BACK_HEIGHT));
     Go_Back_spr.scale(0.5,0.5);
     if(companies[0].getHeight_image()>250 || companies[0].getWidth_image()>250)
@@ -575,6 +577,8 @@ void Game::disp_go_back()
 
 void Game::disp_go_south()
 {
+    if(win)
+        return;
     if(isCountry)
         return;
     if(isSouth)

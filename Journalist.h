@@ -29,6 +29,12 @@ public:
       this->setWidth_image(width);
   };
 
+  std::string greeting(std::string OtherPersonName,std::string Place)
+{
+    std:: string greet="Bonjour "+OtherPersonName+" et bienvenue en "+Place;
+    greet+=".Je suis "+this->getName()+" et je suis un(e) Journaliste comme toi.";
+    return greet;
+}
   /**
    * Empty Destructor
    */

@@ -143,7 +143,7 @@ private:
 
   static void initAttributes () ;
   static bool IsExiting();
-  static void GameLoop(Place p,Person pers);
+  static void GameLoop(Place p,Person* pers);
   static void ShowStartScreen();
   static void ShowMenu();
   static void ShowIntro();

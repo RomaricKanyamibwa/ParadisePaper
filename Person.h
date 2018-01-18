@@ -29,6 +29,7 @@ public:
   Person ();
   Person (std::string Name,std::string Image):Display(Image),Name(Name){};
   Person (std::string Name,std::string Image,Sex sex):Display(Image),Name(Name),_Sex(sex){};
+  virtual std::string greeting(std::string OtherPersonName,std::string Place)=0;
 
   /**
    * Empty Destructor

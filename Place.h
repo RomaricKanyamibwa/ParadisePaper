@@ -83,7 +83,7 @@ private:
 
   std::string Name;
   std::vector<int> Position;
-  Person pers;
+  Person* pers;
 public:
 
 
@@ -149,7 +149,7 @@ public:
    * Set the value of pers
    * @param new_var the new value of pers
    */
-  void setPerson (Person new_var)   {
+  void setPerson (Person* new_var)   {
       pers = new_var;
   }
 
@@ -157,7 +157,7 @@ public:
    * Get the value of pers
    * @return the value of pers
    */
-  Person getPerson ()   {
+  Person* getPerson ()   {
     return pers;
   }
 private:

@@ -3,3 +3,4 @@ Glencore
 Apple
 Dassault Aviation
 Whirlpool
+END
