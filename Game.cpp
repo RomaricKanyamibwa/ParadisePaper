@@ -533,6 +533,8 @@ void /*Game::*/setDataPlayer()
 
 void load_multinational()
 {
+    if(companies.size()<=0)
+        return;
     Multinational_sprite=getSprite(Multinational_texture,companies[0]);
     Multinational_sprite.setPosition(sf::Vector2f(0,15));
     if(companies[0].getHeight_image()>250 || companies[0].getWidth_image()>250)
@@ -621,7 +623,8 @@ void Game::load_continent(Continent cont,bool payment)
         if(isCountry==true &&  mission_accomplished==true)
         {
             companies.erase(companies.begin());
-            if(companies.size()<=0)
+            if(companies.size()<=0 ||
+               DataPlayer.getCompleted_Missions()>=DataPlayer.getTotal_missions())
                 _gameState=Game::Exiting;
             mission_accomplished=false;
             DataPlayer.getPlayer().setMoney(DataPlayer.getPlayer().getMoney()+110);
@@ -640,7 +643,6 @@ void Game::load_continent(Continent cont,bool payment)
         Game_HEIGHT=cont.getHeight_image();
         Game_WIDTH=cont.getWidth_image();
         isCountry=false;
-
     }
     else
         std::cout<<"NOT Changing Continent:"<<cont.getName()<<std::endl;
