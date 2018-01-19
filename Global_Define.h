@@ -47,6 +47,7 @@
 #define PLAYER_SCREEN "images/PlayerScreen.png"
 #define GAME_OVER_SCREEN "images/game-over.png"
 #define GAME_OVER_WIN_SCREEN "images/game-over-win.png"
+#define WIN_TEXT "images/Win_text.png"
 
 #define GAME_OVER_WIDTH 834.0
 #define GAME_OVER_HEIGHT 500.0
@@ -149,8 +150,11 @@
 
 #define PHRASE_EXPLORE "Vous devez trouver le pays ou se situe le siege social de _ .Pour cela choisissez d'abord un continent puis vous pourrez proposer un pays."
 
+#define UNDEFINED_COUNTRY "Pays non definit"
+
 #include "Continent.h"
 #include "Multinational.h"
+
 
 //
 //extern sf::Font font;

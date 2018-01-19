@@ -75,10 +75,21 @@ void StartScreen::ShowIntro(sf::RenderWindow & renderWindow,std::string file)
 	}
 
 	sf::Sprite sprite;
+    image.setSmooth(true);
 	sprite.setTexture(image);
-	image.setSmooth(true);
 
 	renderWindow.draw(sprite);
+	if(file==GAME_OVER_WIN_SCREEN)
+    {
+        sf::Texture win_text;
+        sf::Sprite win_sprite;
+        win_text.loadFromFile(WIN_TEXT);
+        win_text.setSmooth(true);
+        win_sprite.setTexture(win_text);
+        win_sprite.scale(0.6,0.6);
+        win_sprite.setPosition(sprite.getOrigin());
+        renderWindow.draw(win_sprite);
+    }
 	renderWindow.display();
 
 	sf::Event event;
