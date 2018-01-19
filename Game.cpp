@@ -18,7 +18,7 @@ Journalist Player;
 int playing;
 short int MAX_PHRASES=4;
 std::string continent=WORLD;
-std::string::size_type MAX_DIALOG_PHRASE_LENGTH=std::string("Please choose a Continent AAAAAAAAAAAAAAAAAAAAAAAAAAA.").size();
+std::string::size_type MAX_DIALOG_PHRASE_LENGTH=std::string("Please choose a Continent AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.").size();
 GameInformation DataPlayer;
 
 std::vector<Country> europe=create_continent(EUROPE_FILE);
@@ -428,7 +428,7 @@ void Game::WriteDialogBox(std::string msg)
 {
         text.setString(msg);
         // set the character size
-        text.setCharacterSize(20);
+        text.setCharacterSize(15);
         // set the color
         text.setColor(sf::Color::White);
         text.setPosition(sf::Vector2f(dialog_sprite.getPosition().x+70,dialog_sprite.getPosition().y+50));
