@@ -13,6 +13,16 @@
 
 /**
   * class GameInformation
+  * Cette classe contient tous les informations du joueur et des actions qu'il a
+  * a effectué pendant le jeu.
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  *
   *
   */
 

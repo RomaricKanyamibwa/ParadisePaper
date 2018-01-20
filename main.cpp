@@ -102,7 +102,13 @@ Country get_country(int X,int Y,Continent continent)
     }
     return country;
 }
-
+/**
+* Cette fonction reccupere les multinational qui se trouve dans
+* MultiNational.txt et cree un vecteur avec ces Multinational.
+*
+*@return std::vector<Multinational>
+*
+*/
 std::vector<Multinational> get_Multinationals()
 {
     std::vector<Multinational> companies;
@@ -126,6 +132,12 @@ std::vector<Multinational> get_Multinationals()
     return companies;
 }
 
+/**
+* cette fonction crée la multinational Name
+*
+* @param Name
+* @return Multinational
+*/
 Multinational create_Multinational(std::string Name)
 {
     Multinational m;
@@ -182,6 +194,16 @@ Multinational create_Multinational(std::string Name)
     return m;
 }
 
+/**
+*cette fonction recupere le continenr qui se trouve à
+*
+*
+* @param X
+* @param Y
+* @param continents
+*
+* @return Continent
+*/
 Continent get_continent(int X,int Y,std::vector<Continent> continents)
 {
     Continent cont;
@@ -208,6 +230,13 @@ Continent get_continent(int X,int Y,std::vector<Continent> continents)
         return Oceania;
     return cont;
 }
+/**
+* Fonction qui charge le sprite de Display p
+* @param  texture
+* @param p
+*
+* @return
+**/sf::Sprite;
 
 sf::Sprite getSprite(sf::Texture& texture2,Display p)
 {
@@ -222,7 +251,13 @@ sf::Sprite getSprite(sf::Texture& texture2,Display p)
     }
     return sprite;
 }
-
+/**
+* Fonction de decoupage de string pour les mettres dans le
+* dialog_box
+*
+*@param  str
+*@return std::string
+*/
 std::string fit_string_in_dialog_box(std::string& str)
 {
     std::string::size_type str_size=str.size();

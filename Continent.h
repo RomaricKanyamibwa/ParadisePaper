@@ -12,6 +12,8 @@
 
 /**
   * class Continent
+  * cette classe est utilise pour represente les continents
+  * un continent a plusieurs pays,un nom,des coordonnes,une image
   *
   */
 
@@ -137,22 +139,6 @@ public:
   std::vector<Country> getCountries ()   {
     return countries;
   }
-//
-//    /**
-//   * Set the value of Image
-//   * @param new_var the new value of Image
-//   */
-//  void setImage (std::string new_var)   {
-//      Image = new_var;
-//  }
-//
-//  /**
-//   * Get the value of Image
-//   * @return the value of Image
-//   */
-//  std::string getImage ()   {
-//    return Image;
-//  }
 private:
 
 
