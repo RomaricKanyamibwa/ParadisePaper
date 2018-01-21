@@ -343,14 +343,22 @@ void Game::MouseAction()
     unsigned int height = size.y;
     std::cout <<"Window size w:"<< width <<" h:"<< height <<std::endl;
 }
-
+/**
+ * Gestion du dialog box quand on est dans la World map
+ *
+ *
+ */
 void World_Dialog()
 {
     Dialog=PHRASE_EXPLORE;
     Dialog="Bonjour "+DataPlayer.getPlayer().getName()+"."+Dialog.replace(Dialog.find("_"),1,companies[0].getName());
     fit_string_in_dialog_box(Dialog);
 }
-
+/**
+ * cette fonction s'occupe du dialog afficher
+ * au joueur quand il visite un pays.
+ * @param publish
+ */
 void Introduction_Dialog(bool publish=false)
 {
     if(!publish)
@@ -563,6 +571,11 @@ void setDataPlayer()
     Game::Game_HEIGHT=WORLD_HEIGHT;
     Game::Game_WIDTH=WORLD_WIDTH;
 }
+/**
+ *
+ *Ici on charge la multinational à decouvrir
+ *
+ */
 
 void load_multinational()
 {
@@ -609,6 +622,11 @@ void Game::disp_go_south()
     _mainWindow.draw(Go_South_spr);
 }
 
+/**
+ * Cette fonction s'occupe de changer l'interlocuteur du joueur chaque
+ * fois qui il change de continent
+ * @param continent_name
+ */
 
 void change_reporter(std::string continent_name)
 {

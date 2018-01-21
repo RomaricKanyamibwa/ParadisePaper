@@ -17,6 +17,15 @@ std::ostream& operator<<(std::ostream & out, Country p)
     return out;
 
 }
+
+
+/**
+* Cette foction cree les pays qui seront contenu dans le continent
+* stocke dans le fichier filename.
+*
+* @param filename
+* @return std::vector<Country>
+*/
 std::vector<Country> create_continent(std::string file_name)
 {
     std::string line;
@@ -48,6 +57,14 @@ std::vector<Country> create_continent(std::string file_name)
     return continent;
 }
 
+/**
+* Ce fonction lit le fichier continents.txt
+* et retourne un vecteur contenant les continents
+*contenu dans le fichier.
+*
+*@return std::vector<Continent>
+*
+*/
 std::vector<Continent> read_Continents()
 {
     std::string line;
@@ -86,6 +103,14 @@ std::vector<Continent> read_Continents()
     return Continents;
 }
 
+/**
+* Retourne le pay qui se trouve dans les coordonnes X,Y,
+* ce pay se trouve dans continent
+*
+* @param X
+* @param Y
+* @param continent
+*/
 Country get_country(int X,int Y,Continent continent)
 {
     Country country("",0,0,0,0);
@@ -235,8 +260,8 @@ Continent get_continent(int X,int Y,std::vector<Continent> continents)
 * @param  texture
 * @param p
 *
-* @return
-**/sf::Sprite;
+* @return sf::Sprite;
+**/
 
 sf::Sprite getSprite(sf::Texture& texture2,Display p)
 {
